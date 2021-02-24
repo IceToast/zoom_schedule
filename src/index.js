@@ -1,8 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import withReduxFeatures from './withReduxFeatures';
-import App from './components/App';
-import './index.css';
+import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 /** Wrap App component with store providers */
@@ -16,4 +15,4 @@ ReactDOM.render(<WrappedApp />, document.getElementById('root'));
  * Note this comes with some pitfalls.
  * @see https://bit.ly/CRA-PWA
  */
-serviceWorker.unregister();
+serviceWorker.register();
