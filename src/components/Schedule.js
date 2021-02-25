@@ -1,7 +1,7 @@
 import React from 'react';
 import {Day} from '.';
 
-const WeekCalendar = () => {
+const Schedule = () => {
   const week = [
     'Monday',
     'Tuesday',
@@ -13,4 +13,4 @@ const WeekCalendar = () => {
 
   return week.map(day => <Day dayName={day} />);
 };
-export default WeekCalendar;
+export default Schedule;

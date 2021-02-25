@@ -1,4 +1,4 @@
-import WeekCalendar from './WeekCalendar';
+import Schedule from './Schedule';
 import Day from './Day';
 
-export {WeekCalendar, Day};
+export {Schedule, Day};
