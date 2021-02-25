@@ -1,6 +1,6 @@
 import React from 'react';
-import {WeekCalendar} from './components';
+import {Schedule} from './components';
 
-const App = () => <WeekCalendar />;
+const App = () => <Schedule />;
 
 export default App;
