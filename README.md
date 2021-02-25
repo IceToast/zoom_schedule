@@ -6,12 +6,18 @@ This Schedule helps students to keep all their Zoom-Links and passwords at one p
 
 ## Install all dependencies
 
-`yarn`
+```
+yarn
+```
 
 ## Run development server
 
-`yarn start`
+```
+yarn start
+```
 
 ## Build project
 
-` yarn build`
+```
+yarn build
+```
