@@ -1,16 +1,15 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import {useSelector, useDispatch} from 'react-redux';
 import {Day} from '.';
+import {setWeekShort} from '../actions/actions.weekDays';
 
 const Schedule = () => {
-  const week = [
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday',
-  ];
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(setWeekShort());
+  }, [dispatch]);
 
-  return week.map(day => <Day dayName={day} />);
+  const weekDays = useSelector(state => state.weekDays);
+  return weekDays.weekDays.map(day => <Day key={day} dayName={day} />);
 };
 export default Schedule;

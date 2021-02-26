@@ -1,14 +1,8 @@
-import {combineReducers, createStore, applyMiddleware, compose} from 'redux';
+import {createStore, applyMiddleware, compose} from 'redux';
 import {Provider} from 'react-redux';
 import promise from 'redux-promise-middleware';
-
+import rootReducer from './reducers';
 import withProvider from './withProvider';
-
-/**
- * Create root reducer, containing
- * all features of the application
- */
-const rootReducer = combineReducers({});
 
 /**
  * Initialize Redux Dev Tools,
