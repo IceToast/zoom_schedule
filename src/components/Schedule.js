@@ -1,15 +1,26 @@
 import React, {useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
+import {addMeetingToDay} from '../actions/actions.week';
+import {addMeeting} from '../actions/actions.meetings';
+
 import {Day} from '.';
-import {setWeekShort} from '../actions/actions.weekDays';
 
 const Schedule = () => {
   const dispatch = useDispatch();
+  const week = useSelector(state => state.week);
+  const meeting = {
+    id: 1,
+    order: 1,
+    day: 'Monday',
+    link: 'http://cloud.icetoast.de',
+    name: 'Angewandte Mathematik',
+  };
+
   useEffect(() => {
-    dispatch(setWeekShort());
+    dispatch(addMeeting(meeting));
+    dispatch(addMeetingToDay(meeting));
   }, [dispatch]);
 
-  const weekDays = useSelector(state => state.weekDays);
-  return weekDays.weekDays.map(day => <Day key={day} dayName={day} />);
+  return week.days.map(day => <Day dayName={day.name}></Day>);
 };
 export default Schedule;

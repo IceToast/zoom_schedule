@@ -1,8 +1,8 @@
 import {combineReducers} from 'redux';
 import {addSubjectReducer} from './reducer.meetings';
-import {weekDaysReducer} from './reducer.weekDays';
+import {weekReducer} from './reducer.week';
 
 export default combineReducers({
-  weekDays: weekDaysReducer,
+  week: weekReducer,
   meetings: addSubjectReducer,
 });
