@@ -1,6 +1,6 @@
 # Zoom Schedule
 
-This Schedule helps students to keep all their Zoom-Links and passwords at one place access them from every device.
+This Schedule helps students to keep all their Zoom-Links and passwords at one place and access them from every device.
 
 # Setup - Build - Run
 
