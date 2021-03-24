@@ -1,4 +1,6 @@
 import React from 'react';
+import {ThemeProvider} from '@material-ui/core/styles';
+import {theme} from './theme';
 
 /**
  * Utility Higher Order Component factory. Returns HOC which takes another
@@ -6,7 +8,9 @@ import React from 'react';
  */
 const withProvider = ({store, Provider}) => WrappedComponent => props => (
   <Provider store={store}>
-    <WrappedComponent {...props} />
+    <ThemeProvider theme={theme}>
+      <WrappedComponent {...props} />
+    </ThemeProvider>
   </Provider>
 );
 

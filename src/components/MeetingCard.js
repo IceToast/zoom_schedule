@@ -5,6 +5,8 @@ const MeetingCard = ({meetingRoom}) => {
   return (
     <Card>
       <Typography>{meetingRoom.name}</Typography>
+      <Typography>{meetingRoom.link}</Typography>
+      <Typography>{meetingRoom.password}</Typography>
     </Card>
   );
 };

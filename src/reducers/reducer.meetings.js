@@ -9,8 +9,9 @@ export const addSubjectReducer = (state = {}, action) => {
           ...state.meetingRooms,
           {
             id: action.payload.id,
-            link: action.payload.link,
             name: action.payload.name,
+            link: action.payload.link,
+            password: action.payload.password,
           },
         ],
       };
