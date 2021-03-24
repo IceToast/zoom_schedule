@@ -10,15 +10,21 @@ const Schedule = () => {
   const week = useSelector(state => state.week);
 
   useEffect(() => {
-    const meeting = {
-      id: 1,
-      order: 1,
-      day: 'Monday',
-      link: 'http://cloud.icetoast.de',
-      name: 'Angewandte Mathematik',
-    };
-    dispatch(addMeeting(meeting));
-    dispatch(addMeetingToDay(meeting));
+    fetch('https://zoomapi.icetoast.cloud/api/meeting', {
+      method: 'GET',
+      mode: 'cors',
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+      },
+    })
+      .then(response => response.json())
+      .then(data => {
+        data.forEach(meeting => {
+          dispatch(addMeeting(meeting));
+          dispatch(addMeetingToDay(meeting));
+        });
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return <DaysContainer days={week.days} />;
