@@ -1,7 +1,7 @@
 import React from 'react';
 import {makeStyles} from '@material-ui/core/styles';
-import {AppBar, Box, Avatar, Button, Typography} from '@material-ui/core';
-import {Schedule} from './components';
+import {AppBar, Avatar, Button, Typography} from '@material-ui/core';
+import {Schedule, SignIn} from './components';
 
 const useStyles = makeStyles(theme => ({
   appBar: {
@@ -23,19 +23,24 @@ const useStyles = makeStyles(theme => ({
 
 const App = () => {
   const classes = useStyles();
-  return (
-    <>
-      <AppBar position="static" className={classes.appBar}>
-        <Typography variant="h4" className={classes.appTitle}>
-          Zoom Schedule
-        </Typography>
-        <Button className={classes.userButton}>
-          <Avatar src="/images/avatar.jpg"></Avatar>
-        </Button>
-      </AppBar>
-      <Schedule />
-    </>
-  );
+  let userLoggedIn = false;
+  if (!userLoggedIn) {
+    return <SignIn />;
+  } else {
+    return (
+      <>
+        <AppBar position="static" className={classes.appBar}>
+          <Typography variant="h4" className={classes.appTitle}>
+            Zoom Schedule
+          </Typography>
+          <Button className={classes.userButton}>
+            <Avatar src="/images/avatar.jpg"></Avatar>
+          </Button>
+        </AppBar>
+        <Schedule />
+      </>
+    );
+  }
 };
 
 export default App;
