@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import {AppBar, Avatar, Button, Typography} from '@material-ui/core';
 import {Schedule, SignIn} from './components';
@@ -23,17 +23,23 @@ const useStyles = makeStyles(theme => ({
 
 const App = () => {
   const classes = useStyles();
-  let userLoggedIn = false;
-  if (!userLoggedIn) {
-    return <SignIn />;
+  const [isLogged, setIsLogged] = useState(true);
+  const loginHandler = () => {
+    setIsLogged(!isLogged);
+  };
+
+  if (!isLogged) {
+    console.log(isLogged);
+    return <SignIn login={loginHandler} />;
   } else {
+    console.log('App' + isLogged);
     return (
       <>
         <AppBar position="static" className={classes.appBar}>
           <Typography variant="h4" className={classes.appTitle}>
             Zoom Schedule
           </Typography>
-          <Button className={classes.userButton}>
+          <Button className={classes.userButton} onClick={loginHandler}>
             <Avatar src="/images/avatar.jpg"></Avatar>
           </Button>
         </AppBar>

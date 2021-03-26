@@ -23,16 +23,16 @@ const useStyles = makeStyles(theme => ({
       justifyContent: 'space-between',
       height: '3em',
       border: 'solid #c9c9c9 0.5px',
-    },
-    '& img': {
-      marginRight: theme.spacing(1),
-      width: '2em',
-      height: '2em',
+      '& img': {
+        marginRight: theme.spacing(1),
+        width: '2em',
+        height: '2em',
+      },
     },
   },
 }));
 
-const SignIn = () => {
+const SignIn = ({login}) => {
   const classes = useStyles();
 
   return (
@@ -44,15 +44,15 @@ const SignIn = () => {
         Sign in
       </Typography>
       <Box className={classes.loginButtons}>
-        <Button id="google">
+        <Button id="google" onClick={login}>
           <img alt="Sign In" src="/images/loginButtons/google.svg" />
           <span>with Google</span>
         </Button>
-        <Button id="discord">
+        <Button id="discord" onClick={login}>
           <img alt="Sign In" src="/images/loginButtons/discord.svg" />
           <span>with Discord</span>
         </Button>
-        <Button id="Github">
+        <Button id="Github" disabled onClick={login}>
           <img alt="Sign In" src="/images/loginButtons/github.svg" />
           <span>with Github</span>
         </Button>
