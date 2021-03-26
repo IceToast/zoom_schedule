@@ -16,9 +16,11 @@ const useStyles = makeStyles(theme => ({
   loginButtons: {
     display: 'flex',
     flexDirection: 'column',
+
     padding: theme.spacing(2),
     '& Button': {
       margin: theme.spacing(1),
+      justifyContent: 'space-between',
       height: '3em',
       border: 'solid #c9c9c9 0.5px',
     },
@@ -44,15 +46,15 @@ const SignIn = () => {
       <Box className={classes.loginButtons}>
         <Button id="google">
           <img alt="Sign In" src="/images/loginButtons/google.svg" />
-          with Google
+          <span>with Google</span>
         </Button>
         <Button id="discord">
           <img alt="Sign In" src="/images/loginButtons/discord.svg" />
-          with Discord
+          <span>with Discord</span>
         </Button>
         <Button id="Github">
           <img alt="Sign In" src="/images/loginButtons/github.svg" />
-          with Github
+          <span>with Github</span>
         </Button>
       </Box>
     </Grid>
