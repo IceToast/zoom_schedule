@@ -1,12 +1,12 @@
 import React from 'react';
 import {Card, Typography} from '@material-ui/core';
 
-const MeetingCard = ({meetingRoom}) => {
+const MeetingCard = ({name, link, password}) => {
   return (
     <Card>
-      <Typography>{meetingRoom.name}</Typography>
-      <Typography>{meetingRoom.link}</Typography>
-      <Typography>{meetingRoom.password}</Typography>
+      <Typography>{name}</Typography>
+      <Typography>{link}</Typography>
+      <Typography>{password}</Typography>
     </Card>
   );
 };

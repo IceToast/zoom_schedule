@@ -13,7 +13,7 @@ const Day = ({dayName, meetings}) => {
         const meetingRoom = meetingRooms.find(
           meetingRoom => meetingRoom.id === meeting.id
         );
-        return <MeetingCard meetingRoom={meetingRoom}></MeetingCard>;
+        return <MeetingCard {...meetingRoom}></MeetingCard>;
       })}
     </Box>
   );
