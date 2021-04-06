@@ -32,7 +32,13 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const SignIn = ({login}) => {
+
+const pushToPath = (path) => {
+  const apiURL = 'https://zoomapi.icetoast.cloud';
+  window.location = apiURL + path;
+}
+
+const SignIn = () => {
   const classes = useStyles();
 
   return (
@@ -44,15 +50,15 @@ const SignIn = ({login}) => {
         Sign in
       </Typography>
       <Box className={classes.loginButtons}>
-        <Button id="google" onClick={login}>
+        <Button id="google" onClick={() => pushToPath('/api/auth/google')}>
           <img alt="Sign In" src="/images/loginButtons/google.svg" />
           <span>with Google</span>
         </Button>
-        <Button id="discord" onClick={login}>
+        <Button id="discord" onClick={() => pushToPath('/api/auth/discord')}>
           <img alt="Sign In" src="/images/loginButtons/discord.svg" />
           <span>with Discord</span>
         </Button>
-        <Button id="Github" disabled onClick={login}>
+        <Button id="Github" disabled onClick={() => {}}>
           <img alt="Sign In" src="/images/loginButtons/github.svg" />
           <span>with Github</span>
         </Button>

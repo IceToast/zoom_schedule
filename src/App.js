@@ -1,7 +1,8 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import {AppBar, Avatar, Button, Typography} from '@material-ui/core';
 import {Schedule, SignIn} from './components';
+import { getCookie } from './util/cookieHelper';
 
 const useStyles = makeStyles(theme => ({
   appBar: {
@@ -23,23 +24,17 @@ const useStyles = makeStyles(theme => ({
 
 const App = () => {
   const classes = useStyles();
-  const [isLogged, setIsLogged] = useState(true);
-  const loginHandler = () => {
-    setIsLogged(!isLogged);
-  };
 
-  if (!isLogged) {
-    console.log(isLogged);
-    return <SignIn login={loginHandler} />;
+  if (!getCookie('session_id')) {
+    return <SignIn />;
   } else {
-    console.log('App' + isLogged);
     return (
       <>
         <AppBar position="static" className={classes.appBar}>
           <Typography variant="h4" className={classes.appTitle}>
             Zoom Schedule
           </Typography>
-          <Button className={classes.userButton} onClick={loginHandler}>
+          <Button className={classes.userButton}>
             <Avatar src="/images/avatar.jpg"></Avatar>
           </Button>
         </AppBar>
