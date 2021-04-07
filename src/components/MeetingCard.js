@@ -1,12 +1,28 @@
 import React from 'react';
-import {Card, Typography} from '@material-ui/core';
+import {Card, Typography, Link, makeStyles} from '@material-ui/core';
+import {
+  FileCopy as FileCopyIcon
+} from '@material-ui/icons';
+
+const useStyles = makeStyles(theme => ({
+  mettingName: {
+    fontWeight: 'bold'
+  }
+}))
 
 const MeetingCard = ({name, link, password}) => {
+
+  const classes = useStyles();
+
   return (
     <Card>
-      <Typography>{name}</Typography>
-      <Typography>{link}</Typography>
-      <Typography>{password}</Typography>
+      <Typography className={classes.mettingName}>{name}</Typography>
+      <Typography>
+        <Link href={link} target="_blank">
+          {link}
+        </Link>
+      </Typography>
+      <Typography>Passwort: {password}</Typography>
     </Card>
   );
 };
