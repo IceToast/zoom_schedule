@@ -14,7 +14,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const { requestsReducer, requestsMiddleware } = handleRequests({
   driver: createDriver(axios.create({
-    baseURL: 'https://zoomapi.icetoast.cloud',
+    baseURL: 'https://zoom.icetoast.cloud/api',
     withCredentials: true
   })),
 });
