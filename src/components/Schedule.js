@@ -17,6 +17,11 @@ const Schedule = () => {
     dispatch(loadMeetings());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  
+  // use dummy data in development mode 
+  if(process.env.NODE_ENV === 'development'){
+    return <DaysContainer days={[{"name":"Monday","meetings":[{"_id":"606db63ecd93d8733fc2c407","name":"Meeting name","link":"http://zoommeeting.com","password":"12345"}]},{"name":"Tuesday"},{"name":"Wedensday"},{"name":"Thursday"},{"name":"Friday"},{"name":"Saturday"}]} />;
+  }
 
   return (
     <Query
