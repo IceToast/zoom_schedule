@@ -32,7 +32,11 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const SignIn = ({login}) => {
+function pushToHref(socialLoginProvider){
+  window.location.pathname = '/api/auth/' + socialLoginProvider;
+}
+
+const SignIn = () => {
   const classes = useStyles();
 
   return (
@@ -44,15 +48,15 @@ const SignIn = ({login}) => {
         Sign in
       </Typography>
       <Box className={classes.loginButtons}>
-        <Button id="google" onClick={login}>
+        <Button id="google" onClick={() => pushToHref('google')}>
           <img alt="Sign In" src="/images/loginButtons/google.svg" />
           <span>with Google</span>
         </Button>
-        <Button id="discord" onClick={login}>
+        <Button id="discord" onClick={() => pushToHref('discord')}>
           <img alt="Sign In" src="/images/loginButtons/discord.svg" />
           <span>with Discord</span>
         </Button>
-        <Button id="Github" disabled onClick={login}>
+        <Button id="Github" disabled>
           <img alt="Sign In" src="/images/loginButtons/github.svg" />
           <span>with Github</span>
         </Button>

@@ -1,8 +1,5 @@
 import React from 'react';
 import {Card, Typography, Link, makeStyles} from '@material-ui/core';
-import {
-  FileCopy as FileCopyIcon
-} from '@material-ui/icons';
 
 const useStyles = makeStyles(theme => ({
   mettingName: {

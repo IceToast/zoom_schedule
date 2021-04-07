@@ -7,7 +7,7 @@ const DaysContainer = ({days}) => {
     <Container>
       <Grid container direction="row" justify="center" spacing={2}>
         {days?.map(day => (
-          <Grid item xs={2}>
+          <Grid key={day.name} item xs={2}>
             <Day dayName={day.name} meetings={day.meetings}></Day>
           </Grid>
         ))}
