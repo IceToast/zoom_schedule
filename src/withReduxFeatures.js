@@ -1,8 +1,9 @@
-import {createStore, applyMiddleware, compose} from 'redux';
+import {createStore, applyMiddleware, compose, combineReducers} from 'redux';
 import {Provider} from 'react-redux';
-import promise from 'redux-promise-middleware';
-import rootReducer from './reducers';
 import withProvider from './withProvider';
+import { handleRequests } from '@redux-requests/core';
+import { createDriver } from '@redux-requests/axios';
+import axios from 'axios';
 
 /**
  * Initialize Redux Dev Tools,
@@ -11,27 +12,21 @@ import withProvider from './withProvider';
 /** Use Redux compose, if browser doesn't have Redux devtools */
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const initState = {
-  week: {
-    days: [
-      {name: 'Monday', meetings: []},
-      {name: 'Tuesday', meetings: []},
-      {name: 'Wednesday', meetings: []},
-      {name: 'Thursday', meetings: []},
-      {name: 'Friday', meetings: []},
-      {name: 'Saturday', meetings: []},
-    ],
-  },
-  meetings: {
-    meetingRooms: [],
-  },
-};
+const { requestsReducer, requestsMiddleware } = handleRequests({
+  driver: createDriver(axios.create({
+    baseURL: 'https://zoomapi.icetoast.cloud',
+    withCredentials: true
+  })),
+});
+
+const reducers = combineReducers({
+  requests: requestsReducer,
+});
 
 /** Create Redux store with root reducer and middleware included */
 export const store = createStore(
-  rootReducer,
-  initState,
-  composeEnhancers(applyMiddleware(promise))
+  reducers,
+  composeEnhancers(applyMiddleware(...requestsMiddleware))
 );
 
 /**

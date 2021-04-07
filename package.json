@@ -8,6 +8,7 @@
     "@material-ui/icons": "^4.11.2",
     "@redux-requests/axios": "^1.1.1",
     "@redux-requests/core": "^1.6.2",
+    "@redux-requests/react": "^1.6.1",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.3",
     "@testing-library/react-hooks": "^5.0.3",
@@ -32,6 +33,7 @@
     "redux": "^4.0.5",
     "redux-mock-store": "^1.5.4",
     "redux-promise-middleware": "^6.1.2",
+    "reselect": "^4.0.0",
     "stylelint": "^13.9.0",
     "stylelint-config-standard": "^20.0.0",
     "stylelint-order": "^4.1.0"
