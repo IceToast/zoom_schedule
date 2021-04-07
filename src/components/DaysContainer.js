@@ -5,7 +5,7 @@ import {Day} from '.';
 const DaysContainer = week => {
   return (
     <Grid container direction="row" justify="center" alignItems="center">
-      {week.days.map(day => (
+      {week.map(day => (
         <Day dayName={day.name} meetings={day.meetings}></Day>
       ))}
     </Grid>

@@ -26,7 +26,7 @@ const Schedule = () => {
       noDataMessage={<p>There is no entity currently.</p>}>
       {({data}) => {
         console.log(data);
-        return <DaysContainer days={data.week.days} />;
+        return <DaysContainer days={data} />;
       }}
     </Query>
   );
