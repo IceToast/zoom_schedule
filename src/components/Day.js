@@ -1,6 +1,8 @@
 import React from 'react';
 import {Box, makeStyles, Typography, IconButton} from '@material-ui/core';
 import {MeetingCard} from '.';
+import { useDispatch } from 'react-redux';
+import { setFormDialogState } from '../actions/actions.setFormDialogState';
 import {
   Add as AddIcon
 } from '@material-ui/icons';
@@ -20,6 +22,25 @@ const useStyles = makeStyles(theme => ({
 const Day = ({dayName, meetings}) => {
 
   const classes = useStyles();
+  const dispatch = useDispatch();
+
+  function openDialogForMeetingCreation(){
+    dispatch(setFormDialogState({
+      open: true,
+      onClose: closeDialog,
+      mode: 'create',
+      meeting: {}
+    }))
+  }
+
+  function closeDialog(){
+    dispatch(setFormDialogState({
+      open: false,
+      onClose: () => {},
+      mode: 'create',
+      meeting: {}
+    }))
+  }
 
   return (
     <Box color="primary.main">
@@ -28,7 +49,7 @@ const Day = ({dayName, meetings}) => {
         return <MeetingCard key={meeting._id} meeting={meeting} day={dayName}></MeetingCard>;
       })}
       <div className={classes.addMeetingButtonContainer}>
-        <IconButton onClick={() => alert("Adding meeting")}>
+        <IconButton onClick={openDialogForMeetingCreation}>
           <AddIcon />
         </IconButton>
       </div>

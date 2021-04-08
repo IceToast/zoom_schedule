@@ -1,8 +1,11 @@
 import React from 'react';
 import {Grid, Container} from '@material-ui/core';
 import {Day} from '.';
+import FormDialog from './FormDialog';
 
 const DaysContainer = ({days}) => {
+
+
   return (
     <Container>
       <Grid container direction="row" justify="center" spacing={2}>
@@ -12,6 +15,7 @@ const DaysContainer = ({days}) => {
           </Grid>
         ))}
       </Grid>
+      <FormDialog />
     </Container>
   );
 };

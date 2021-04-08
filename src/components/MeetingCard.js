@@ -33,9 +33,8 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const MeetingCard = ({meeting, day}) => {
 
-  console.log(day);
+const MeetingCard = ({meeting, day}) => {
 
   const classes = useStyles();
   const dispatch = useDispatch();

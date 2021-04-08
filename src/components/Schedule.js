@@ -6,14 +6,18 @@ import { setLoggedInState } from '../actions/actions.setLoggedInState';
 
 import {DaysContainer} from '.';
 import {Query} from '@redux-requests/react';
-import { Typography } from '@material-ui/core';
+import { Container, Typography } from '@material-ui/core';
 
 const RequestError = () => (
-  <Typography>Ein Fehler ist aufgetaucht. Bitte versuche es erneut.</Typography>
+  <Container>
+    <Typography>Ein Fehler ist aufgetaucht. Bitte versuche es erneut.</Typography>
+  </Container>
 );
 
 const Spinner = () => (
-  <Typography>Lädt...</Typography>
+  <Container>
+    <Typography>Lädt...</Typography>
+  </Container>
 )
 
 const Schedule = () => {
