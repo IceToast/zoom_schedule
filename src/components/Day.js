@@ -25,7 +25,7 @@ const Day = ({dayName, meetings}) => {
     <Box color="primary.main">
       <Typography className={classes.dayLabel} variant="h5">{dayName}</Typography>
       {meetings?.map(meeting => {
-        return <MeetingCard key={meeting._id} {...meeting}></MeetingCard>;
+        return <MeetingCard key={meeting._id} meeting={meeting} day={dayName}></MeetingCard>;
       })}
       <div className={classes.addMeetingButtonContainer}>
         <IconButton onClick={() => alert("Adding meeting")}>
