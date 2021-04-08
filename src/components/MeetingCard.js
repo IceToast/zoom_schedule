@@ -51,7 +51,7 @@ const MeetingCard = ({meeting, day}) => {
     dispatch(setFormDialogState({
       open: true,
       onClose: closeDialog,
-      mode: 'create',
+      mode: 'edit',
       meeting: {
         day,
         ...meeting
