@@ -6,6 +6,7 @@ import {
   Delete as DeleteIcon,
   Edit as EditIcon
 } from '@material-ui/icons';
+import { setFormDialogState } from '../actions/actions.setFormDialogState';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -46,9 +47,30 @@ const MeetingCard = ({meeting, day}) => {
     }
   }
 
+  function openDialogForMeetingEdit(){
+    dispatch(setFormDialogState({
+      open: true,
+      onClose: closeDialog,
+      mode: 'create',
+      meeting: {
+        day,
+        ...meeting
+      }
+    }))
+  }
+
+  function closeDialog(){
+    dispatch(setFormDialogState({
+      open: false,
+      onClose: () => {},
+      mode: 'create',
+      meeting: {}
+    }))
+  }
+
   return (
     <Card className={classes.root}>
-      <IconButton className={classes.editButton} onClick={() => {}} size="small">
+      <IconButton className={classes.editButton} onClick={openDialogForMeetingEdit} size="small">
         <EditIcon />
       </IconButton>
       <IconButton className={classes.deleteButton} onClick={getDeleteConfirm} size="small">

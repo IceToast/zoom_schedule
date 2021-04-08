@@ -10,6 +10,7 @@ import Alert from '@material-ui/lab/Alert';
 import { useDispatch, useSelector } from 'react-redux';
 import { createMeeting } from '../actions/actions.createMeeting';
 import { setFormDialogState } from '../actions/actions.setFormDialogState';
+import { editMeeting } from '../actions/actions.editMeeting';
 
 function FormDialog(){
 
@@ -18,6 +19,7 @@ function FormDialog(){
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
 
+    const idInputRef = useRef();
     const dayInputRef = useRef();
     const nameInputRef = useRef();
     const linkInputRef = useRef();
@@ -39,7 +41,13 @@ function FormDialog(){
         }
 
         if(formDialogState.mode === 'edit'){
-            action = null
+            action = editMeeting({
+                _id: idInputRef.current.value,
+                day: dayInputRef.current.value,
+                name: nameInputRef.current.value,
+                link: linkInputRef.current.value,
+                password: passwordInputRef.current.value
+            })
         }
         
         const { error } = await dispatch(action);
@@ -64,6 +72,7 @@ function FormDialog(){
                 <DialogTitle id="form-dialog-title">Erstelle/bearbeite ein Meeting</DialogTitle>
                 {error && <Alert severity="error">Ein Fehler ist aufgetaucht. Bitte prüfe deine Eingaben.</Alert>}
                 <DialogContent>
+                    <input hidden name="id" value={formDialogState.meeting?._id} ref={idInputRef} />
                     <input hidden name="day" value={formDialogState.meeting?.day} ref={dayInputRef} />
                     <TextField
                         name="name"
