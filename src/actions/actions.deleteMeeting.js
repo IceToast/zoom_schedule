@@ -16,15 +16,18 @@ export const deleteMeeting = (deleteMeeting, day) => {
         meta: {
             mutations: {
                 [LOAD_MEETINGS]: data => {
-                    const dayIndex = data.findIndex(day => day.name === day);
+                    const dayIndex = data.findIndex(day => {
+                        console.log(`${day.name} ${day}`);
+                        return day.name === day;
+                    });
                     console.log("dayIndex: " + dayIndex);
                     const newData = [...data]
                     console.log(newData);
                     if(newData[dayIndex]){
                         newData[dayIndex].meetings = newData[dayIndex].meetings.filter(meeting => meeting._id !== deleteMeeting._id)
                         console.log(newData);
-                        return newData;
                     }
+                    return newData;
                 }
             }
         }
