@@ -35,6 +35,8 @@ const useStyles = makeStyles(theme => ({
 
 const MeetingCard = ({meeting, day}) => {
 
+  console.log(day);
+
   const classes = useStyles();
   const dispatch = useDispatch();
 

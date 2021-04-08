@@ -1,7 +1,7 @@
 import { LOAD_MEETINGS } from './actions.loadMeetings';
 export const DELETE_MEETING = 'DELETE_MEETING';
 
-export const deleteMeeting = (deleteMeeting, day) => {
+export const deleteMeeting = (deleteMeeting, deleteDay) => {
 
     return {
         type: DELETE_MEETING,
@@ -10,22 +10,16 @@ export const deleteMeeting = (deleteMeeting, day) => {
             method: 'DELETE',
             data: {
                 id: deleteMeeting._id,
-                day
+                day: deleteDay
             },
         },
         meta: {
             mutations: {
                 [LOAD_MEETINGS]: data => {
-                    const dayIndex = data.findIndex(day => {
-                        console.log(`${day.name} ${day}`);
-                        return day.name === day;
-                    });
-                    console.log("dayIndex: " + dayIndex);
+                    const dayIndex = data.findIndex(day => day.name === deleteDay);
                     const newData = [...data]
-                    console.log(newData);
                     if(newData[dayIndex]){
                         newData[dayIndex].meetings = newData[dayIndex].meetings.filter(meeting => meeting._id !== deleteMeeting._id)
-                        console.log(newData);
                     }
                     return newData;
                 }
