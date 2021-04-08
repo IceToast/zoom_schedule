@@ -10,7 +10,7 @@ import {
 const useStyles = makeStyles(theme => ({
   root: {
     position: 'relative',
-    padding: theme.spacing(2, 2, 1, 1),
+    padding: theme.spacing(3, 2, 1, 1),
     
     '&:not(:last-child)': {
       marginBottom: theme.spacing(1)
