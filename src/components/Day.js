@@ -24,12 +24,14 @@ const Day = ({dayName, meetings}) => {
   const classes = useStyles();
   const dispatch = useDispatch();
 
-  function openDialogForMeetingCreation(){
+  function openDialogForMeetingCreation(day){
     dispatch(setFormDialogState({
       open: true,
       onClose: closeDialog,
       mode: 'create',
-      meeting: {}
+      meeting: {
+        day
+      }
     }))
   }
 
@@ -49,7 +51,7 @@ const Day = ({dayName, meetings}) => {
         return <MeetingCard key={meeting._id} meeting={meeting} day={dayName}></MeetingCard>;
       })}
       <div className={classes.addMeetingButtonContainer}>
-        <IconButton onClick={openDialogForMeetingCreation}>
+        <IconButton onClick={() => openDialogForMeetingCreation(dayName)}>
           <AddIcon />
         </IconButton>
       </div>
