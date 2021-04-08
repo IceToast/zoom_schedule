@@ -4,6 +4,7 @@ import withProvider from './withProvider';
 import { handleRequests } from '@redux-requests/core';
 import { createDriver } from '@redux-requests/axios';
 import axios from 'axios';
+import { authReducer, formDialogReducer } from './reducers';
 
 /**
  * Initialize Redux Dev Tools,
@@ -21,6 +22,8 @@ const { requestsReducer, requestsMiddleware } = handleRequests({
 
 const reducers = combineReducers({
   requests: requestsReducer,
+  auth: authReducer,
+  formDialog: formDialogReducer
 });
 
 /** Create Redux store with root reducer and middleware included */
