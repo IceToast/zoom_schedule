@@ -16,7 +16,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const { requestsReducer, requestsMiddleware } = handleRequests({
   driver: createDriver(
     axios.create({
-      baseURL: 'http://localhost:8011',
+      baseURL: 'http://localhost:8011/api',
       withCredentials: true,
     })
   ),
