@@ -1,9 +1,7 @@
-export const LOAD_MEETINGS = 'LOAD_MEETINGS';
+import {createAction} from '@reduxjs/toolkit';
 
-export const loadMeetings = () => ({
-    type: LOAD_MEETINGS,
-    request: {
-      url: '/meeting',
-      method: 'GET'
-    }
-})
+export const fetchMeetings = createAction('fetchMeetings', _ => ({
+  payload: {
+    request: {url: '/meeting', method: 'GET'},
+  },
+}));
