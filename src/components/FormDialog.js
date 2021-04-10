@@ -101,11 +101,11 @@ function FormDialog(){
                     />
                 </DialogContent>
                 <DialogActions>
-                    <Button disabled={loading} onClick={formDialogState.onClose} color="primary">
-                        Cancel
+                    <Button disabled={loading} onClick={formDialogState.onClose}>
+                        Abbrechen
                     </Button>
-                    <Button disabled={loading} type="submit" color="primary">
-                        Subscribe
+                    <Button disabled={loading} type="submit" color="primary" variant="contained">
+                        Bestätigen
                     </Button>
                 </DialogActions>
             </form>

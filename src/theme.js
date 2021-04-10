@@ -1,17 +1,18 @@
-import {createMuiTheme, responsiveFontSizes} from '@material-ui/core/styles';
-import Color from 'color';
+import {createMuiTheme, responsiveFontSizes, ThemeProvider} from '@material-ui/core/styles';
+import blue from '@material-ui/core/colors/blue';
+import { useSelector } from 'react-redux';
+import { CssBaseline } from '@material-ui/core';
 
 const mainColor = '#ffffff';
 
-export const getColorPalette = color => ({
-  light: Color(color).lighten(0.25).hsl().string(),
-  main: color,
-  dark: Color(color).darken(0.25).hsl().string(),
-  contrastText: Color(color).isDark() ? '#ffffff' : '#000000',
+export const getColorPalette = (color, type) => ({
+  type,
+  primary: blue
 });
 
-export const theme = () => {
-  const colorPalette = getColorPalette(mainColor);
+
+const theme = (config) => {
+  const colorPalette = getColorPalette(mainColor, config.type);
   return responsiveFontSizes(
     createMuiTheme({
       palette: colorPalette,
@@ -42,3 +43,21 @@ export const theme = () => {
     })
   );
 };
+
+
+function Theme(props){
+
+  const themePaletteType = useSelector(state => state.theme.paletteType);
+  const themeInstance = theme({type: themePaletteType});
+
+  return(
+    <ThemeProvider theme={themeInstance}>
+      <CssBaseline />
+      {props.children}
+    </ThemeProvider>
+  )
+}
+
+export default Theme;
+
+
