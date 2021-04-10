@@ -1,4 +1,4 @@
-import { setLoginState } from '../actions/actions.setLoginState';
+import { setLoginState } from '../actions/actions.auth';
 import { createReducer } from '@reduxjs/toolkit';
 
 export default createReducer(

@@ -5,7 +5,7 @@ import { Schedule, SignIn } from './components';
 import { useDispatch, useSelector } from 'react-redux';
 import { setThemeState } from './actions/actions.setThemeState';
 import { fetchMeetings } from './actions/actions.meeting';
-import { setLoginState } from './actions/actions.setLoginState';
+import { setLoginState } from './actions/actions.auth';
 import { AccountCircle as AccountCircleIcon, Brightness7 as DarkIcon, Brightness4 as BrightIcon } from '@material-ui/icons';
 
 const useStyles = makeStyles(theme => ({
