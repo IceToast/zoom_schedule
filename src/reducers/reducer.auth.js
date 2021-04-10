@@ -1,17 +1,11 @@
-import { SET_LOGIN_STATE } from '../actions/actions.setLoggedInState';
+import {SET_LOGIN_STATE} from '../actions/actions.setLoggedInState';
+import {createReducer} from '@reduxjs/toolkit';
 
-const initialState = {
-    isLoggedIn: true
-}
-
-export function authReducer(state = initialState, action){
-    switch(action.type){
-        case SET_LOGIN_STATE:
-            return {
-                ...state,
-                isLoggedIn: action.isLoggedIn
-            }
-        default:
-            return state
-    }
-}
+export default createReducer(
+  {isLoggedIn: true},
+  {
+    [SET_LOGIN_STATE]: (state, action) => {
+      state.isLoggedIn = action.isLoggedIn;
+    },
+  }
+);
