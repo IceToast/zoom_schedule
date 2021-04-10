@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {makeStyles} from '@material-ui/core/styles';
-import {AppBar, ThemeProvider, CssBaseline, Container, IconButton, Typography} from '@material-ui/core';
+import {AppBar, Container, IconButton, Typography} from '@material-ui/core';
 import {Schedule, SignIn} from './components';
-import { useSelector } from 'react-redux';
-import { theme } from './theme';
+import { useDispatch, useSelector } from 'react-redux';
+import { setThemeState } from './actions/actions.setThemestate';
 import {
   AccountCircle as AccountCircleIcon,
   Brightness7 as DarkIcon,
@@ -39,20 +39,17 @@ const useStyles = makeStyles(theme => ({
 
 const App = () => {
   const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
-  
-  const themePaletteTypeLocalStorageValue = localStorage.getItem('themePaletteType') || 'light';
-  const [themePaletteType, setThemePaletteType] = useState(themePaletteTypeLocalStorageValue);
-  const themeInstance = theme({type: themePaletteType});
-  
+  const themePaletteType = useSelector(state => state.theme.paletteType);
   const classes = useStyles({themePaletteType});
+  const dispatch = useDispatch();
 
   function handleDarkModeButtonClick(){
     if(themePaletteType === 'dark'){
       localStorage.removeItem('themePaletteType');
-      setThemePaletteType('light');
+      dispatch(setThemeState({paletteType: 'light'}));
     }else{
       localStorage.setItem('themePaletteType', 'dark');
-      setThemePaletteType('dark');
+      dispatch(setThemeState({paletteType: 'dark'}));
     }
   }
 
@@ -60,8 +57,7 @@ const App = () => {
     return <SignIn />;
   } else {
     return (
-      <ThemeProvider theme={themeInstance}>
-        <CssBaseline />
+      <>
         <AppBar position="static" className={classes.appBar}>
           <Container className={classes.appBarContainer}>
             <Typography variant="h4" className={classes.appTitle}>
@@ -82,7 +78,7 @@ const App = () => {
           </Container>
         </AppBar>
         <Schedule />
-      </ThemeProvider>
+      </>
     );
   }
 };
