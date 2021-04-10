@@ -2,9 +2,9 @@ name: Build
 
 on:
   push:
-    branches: [ master ]
+    branches: [develop]
   pull_request:
-    branches: [ master ]
+    branches: [develop]
 
 jobs:
   build_and_publish:
@@ -26,9 +26,9 @@ jobs:
       - name: Deploy to Server
         uses: easingthemes/ssh-deploy@v2.1.5
         env:
-            SSH_PRIVATE_KEY: ${{ secrets.RSYNC_DEPLOY_SECRET }}
-            ARGS: "-rltgoDzvO --delete"
-            SOURCE: "build/"
-            REMOTE_HOST: ${{ secrets.RSYNC_DEPLOY_HOST }}
-            REMOTE_USER: ${{ secrets.RSYNC_DEPLOY_USER }}
-            TARGET: ${{ secrets.RSYNC_DEPLOY_DEST_PATH }}
+          SSH_PRIVATE_KEY: ${{ secrets.RSYNC_DEPLOY_SECRET }}
+          ARGS: '-rltgoDzvO --delete'
+          SOURCE: 'build/'
+          REMOTE_HOST: ${{ secrets.RSYNC_DEPLOY_HOST }}
+          REMOTE_USER: ${{ secrets.RSYNC_DEPLOY_USER }}
+          TARGET: ${{ secrets.RSYNC_DEPLOY_DEST_PATH_DEV }}
