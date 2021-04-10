@@ -3,4 +3,11 @@ import authReducer from './reducer.auth';
 import formDialogReducer from './reducer.formDialog';
 import meetingReducer from './reducer.meeting';
 
-export { themeReducer, authReducer, formDialogReducer, meetingReducer };
+const reducers = {
+  theme: themeReducer,
+  auth: authReducer,
+  formDialog: formDialogReducer,
+  meetings: meetingReducer,
+};
+
+export default reducers;
