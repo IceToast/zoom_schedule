@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {useDispatch} from 'react-redux';
 import {fetchMeetings} from '../actions/actions.meeting';
-import {setLoggedInState} from '../actions/actions.setLoggedInState';
+import {setLoginState} from '../actions/actions.setLoginState';
 
 import {DaysContainer} from '.';
 import {Query} from '@redux-requests/react';
@@ -9,9 +9,7 @@ import {Container, Typography} from '@material-ui/core';
 
 const RequestError = () => (
   <Container>
-    <Typography>
-      Ein Fehler ist aufgetaucht. Bitte versuche es erneut.
-    </Typography>
+    <Typography>Ein Fehler ist aufgetaucht. Bitte versuche es erneut.</Typography>
   </Container>
 );
 
@@ -34,9 +32,9 @@ const Schedule = () => {
         errorMessage === 'invalid Cookie or session expired' &&
         process.env.NODE_ENV !== 'development'
       ) {
-        dispatch(setLoggedInState(false));
+        dispatch(setLoginState(false));
       } else {
-        dispatch(setLoggedInState(true));
+        dispatch(setLoginState(true));
       }
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps

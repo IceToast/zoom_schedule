@@ -1,12 +1,12 @@
 import {createReducer} from '@reduxjs/toolkit';
-import {setTheme} from '../actions/actions.setThemestate';
+import {setThemeState} from '../actions/actions.setThemeState';
 
 export default createReducer(
   {
     paletteType: localStorage.getItem('themePaletteType') || 'light',
   },
   {
-    [setTheme]: (state, action) => {
+    [setThemeState]: (state, action) => {
       state.paletteType = action.payload.themeState;
     },
   }
