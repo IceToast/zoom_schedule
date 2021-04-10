@@ -1,6 +1,6 @@
 import {createAction} from '@reduxjs/toolkit';
 
-export const setTheme = createAction('setTheme', setState => ({
+export const setThemeState = createAction('setTheme', setState => ({
   payload: {
     themeState: setState,
   },
