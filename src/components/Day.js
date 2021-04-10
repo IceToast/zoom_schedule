@@ -45,7 +45,7 @@ const Day = ({dayName, meetings}) => {
   }
 
   return (
-    <Box color="primary.main">
+    <Box>
       <Typography className={classes.dayLabel} variant="h5">{dayName}</Typography>
       {meetings?.map(meeting => {
         return <MeetingCard key={meeting._id} meeting={meeting} day={dayName}></MeetingCard>;

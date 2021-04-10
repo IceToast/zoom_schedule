@@ -1,17 +1,15 @@
 import {createMuiTheme, responsiveFontSizes} from '@material-ui/core/styles';
-import Color from 'color';
+import blue from '@material-ui/core/colors/blue';
 
 const mainColor = '#ffffff';
 
-export const getColorPalette = color => ({
-  light: Color(color).lighten(0.25).hsl().string(),
-  main: color,
-  dark: Color(color).darken(0.25).hsl().string(),
-  contrastText: Color(color).isDark() ? '#ffffff' : '#000000',
+export const getColorPalette = (color, type) => ({
+  type,
+  primary: blue
 });
 
-export const theme = () => {
-  const colorPalette = getColorPalette(mainColor);
+export const theme = (config) => {
+  const colorPalette = getColorPalette(mainColor, config.type);
   return responsiveFontSizes(
     createMuiTheme({
       palette: colorPalette,
