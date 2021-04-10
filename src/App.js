@@ -47,10 +47,10 @@ const App = () => {
       const errorMessage = error?.response?.data;
 
       if (
-        errResStatus === 403 ||
         errResStatus === 500 ||
-        errorMessage === 'invalid Cookie or session expired' ||
-        process.env.NODE_ENV !== 'development'
+        (errResStatus === 403 &&
+          errorMessage === 'invalid Cookie or session expired' &&
+          process.env.NODE_ENV !== 'development')
       ) {
         dispatch(setLoginState(false));
       } else {
