@@ -1,13 +1,18 @@
 import React from 'react';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import {Avatar, Button, Box, Typography, Grid} from '@material-ui/core';
-import {makeStyles} from '@material-ui/core/styles';
+import { Avatar, Button, Box, Typography, Grid } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
   paper: {
     minHeight: '80vh',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  title: {
+    fontSize: '2.5em',
+    marginBottom: '1em',
+    fontWeight: 450,
   },
   avatar: {
     margin: theme.spacing(1),
@@ -32,7 +37,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function pushToHref(socialLoginProvider){
+function pushToHref(socialLoginProvider) {
   window.location.pathname = '/api/auth/' + socialLoginProvider;
 }
 
@@ -41,6 +46,9 @@ const SignIn = () => {
 
   return (
     <Grid container direction="column" className={classes.paper}>
+      <Typography className={classes.title} component="h1" variant="h1">
+        Zoom Schedule
+      </Typography>
       <Avatar className={classes.avatar}>
         <LockOutlinedIcon />
       </Avatar>
