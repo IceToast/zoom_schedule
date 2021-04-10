@@ -1,10 +1,10 @@
-import {SET_LOGIN_STATE} from '../actions/actions.setLoggedInState';
+import {setLoginState} from '../actions/actions.setLoggedInState';
 import {createReducer} from '@reduxjs/toolkit';
 
 export default createReducer(
   {isLoggedIn: true},
   {
-    [SET_LOGIN_STATE]: (state, action) => {
+    [setLoginState]: (state, action) => {
       state.isLoggedIn = action.isLoggedIn;
     },
   }
