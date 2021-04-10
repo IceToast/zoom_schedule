@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {useDispatch} from 'react-redux';
-import {fetchMeetings} from '../actions/actions.fetchMeetings';
+import {fetchMeetings} from '../actions/actions.meeting';
 import {setLoggedInState} from '../actions/actions.setLoggedInState';
 
 import {DaysContainer} from '.';
