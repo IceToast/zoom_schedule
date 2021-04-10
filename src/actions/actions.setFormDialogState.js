@@ -1,9 +1,10 @@
-export const SET_FORM_DIALOG_STATE = 'SET_FORM_DIALOG_STATE';
+import {createAction} from '@reduxjs/toolkit';
 
-export const setFormDialogState = (stateData) => ({
-    type: SET_FORM_DIALOG_STATE,
-    open: stateData.open,
-    onClose: stateData.onClose,
-    mode: stateData.mode,
-    meeting: stateData.meeting
-})
+export const setFormDialogState = createAction(
+  'setFormDialogState',
+  dialogStateData => ({
+    payload: {
+      dialogStateData,
+    },
+  })
+);
