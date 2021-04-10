@@ -3,12 +3,8 @@ import {makeStyles} from '@material-ui/core/styles';
 import {AppBar, Container, IconButton, Typography} from '@material-ui/core';
 import {Schedule, SignIn} from './components';
 import {useDispatch, useSelector} from 'react-redux';
-import {setThemeState} from './actions/actions.setThemestate';
-import {
-  AccountCircle as AccountCircleIcon,
-  Brightness7 as DarkIcon,
-  Brightness4 as BrightIcon,
-} from '@material-ui/icons';
+import {setThemeState} from './actions/actions.setThemeState';
+import {AccountCircle as AccountCircleIcon, Brightness7 as DarkIcon, Brightness4 as BrightIcon} from '@material-ui/icons';
 
 const useStyles = makeStyles(theme => ({
   appBar: {
@@ -75,10 +71,7 @@ const App = () => {
                   <BrightIcon className={classes.darkModeIcons} />
                 )}
               </IconButton>
-              <IconButton
-                className={classes.userButton}
-                color="secondary.main"
-                variant="contained">
+              <IconButton className={classes.userButton} color="secondary.main" variant="contained">
                 <AccountCircleIcon className={classes.avatarIcon} />
               </IconButton>
             </div>
