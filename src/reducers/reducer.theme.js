@@ -1,5 +1,5 @@
-import {createReducer} from '@reduxjs/toolkit';
-import {setThemeState} from '../actions/actions.setThemeState';
+import { createReducer } from '@reduxjs/toolkit';
+import { setThemeState } from '../actions/actions.setThemeState';
 
 export default createReducer(
   {
