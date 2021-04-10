@@ -1,47 +1,12 @@
-import React, {useEffect} from 'react';
-import {useDispatch} from 'react-redux';
-import {fetchMeetings} from '../actions/actions.meeting';
-import {setLoginState} from '../actions/actions.setLoginState';
-
-import {DaysContainer} from '.';
-import {Query} from '@redux-requests/react';
-import {Container, Typography} from '@material-ui/core';
-
-const RequestError = () => (
-  <Container>
-    <Typography>Ein Fehler ist aufgetaucht. Bitte versuche es erneut.</Typography>
-  </Container>
-);
-
-const Spinner = () => (
-  <Container>
-    <Typography>Lädt...</Typography>
-  </Container>
-);
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { DaysContainer } from '.';
 
 const Schedule = () => {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchMeetings()).then(({error}) => {
-      const errResStatus = error?.response?.status;
-      const errorMessage = error?.response?.data;
-
-      if (
-        errResStatus === 403 &&
-        errorMessage === 'invalid Cookie or session expired' &&
-        process.env.NODE_ENV !== 'development'
-      ) {
-        dispatch(setLoginState(false));
-      } else {
-        dispatch(setLoginState(true));
-      }
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const days = useSelector(state => state.meetings.days);
 
   // use dummy data in development mode
-  if (process.env.NODE_ENV === 'development') {
+  if (process.env.NODE_ENV !== 'development') {
     return (
       <DaysContainer
         days={[
@@ -67,7 +32,7 @@ const Schedule = () => {
               },
             ],
           },
-          {name: 'Wedensday'},
+          { name: 'Wedensday' },
           {
             name: 'Thursday',
             meetings: [
@@ -96,22 +61,12 @@ const Schedule = () => {
               },
             ],
           },
-          {name: 'Saturday'},
+          { name: 'Saturday' },
         ]}
       />
     );
   }
 
-  return (
-    <Query
-      type={'fetchMeetings'}
-      errorComponent={RequestError}
-      loadingComponent={Spinner}
-      noDataMessage={<p>There is no entity currently.</p>}>
-      {({data}) => {
-        return <DaysContainer days={data} />;
-      }}
-    </Query>
-  );
+  return <DaysContainer days={days}></DaysContainer>;
 };
 export default Schedule;
