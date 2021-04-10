@@ -10,7 +10,7 @@ const setupStore = initialState => {
   const { requestsReducer, requestsMiddleware } = handleRequests({
     driver: createDriver(
       axios.create({
-        baseURL: 'http://localhost:8011/api',
+        baseURL: 'https://zoom.icetoast.cloud/api',
         withCredentials: true,
       })
     ),
