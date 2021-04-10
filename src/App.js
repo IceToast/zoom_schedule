@@ -12,7 +12,7 @@ const useStyles = makeStyles(theme => ({
   appBar: {
     width: '100%',
     padding: theme.spacing(0.5),
-    marginBottom: theme.spacing(2),
+    marginBottom: theme.spacing(6),
   },
   appBarContainer: {
     display: 'flex',

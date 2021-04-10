@@ -38,6 +38,9 @@ const theme = config => {
         caption: {
           fontSize: '0.8em',
         },
+        button: {
+          textTransform: 'none',
+        },
       },
     })
   );

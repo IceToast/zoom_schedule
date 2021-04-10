@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createMeeting, editMeeting } from '../actions/actions.meeting';
 import { setFormDialogState } from '../actions/actions.setFormDialogState';
 
-function FormDialog() {
+const FormDialog = () => {
   const formDialogState = useSelector(state => state.formDialog);
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
@@ -66,7 +66,7 @@ function FormDialog() {
   }
 
   return (
-    <Dialog open={formDialogState.open} onClose={formDialogState.onClose} aria-labelledby="form-dialog-title">
+    <Dialog open={formDialogState.open} onClose={formDialogState.onClose} maxWidth="xs" aria-labelledby="form-dialog-title">
       {loading && <LinearProgress />}
       <form onSubmit={submitData}>
         <DialogTitle id="form-dialog-title">Create/Edit a Meeting</DialogTitle>
@@ -80,6 +80,8 @@ function FormDialog() {
             label="Name"
             fullWidth
             defaultValue={formDialogState.meeting?.name}
+            variant="outlined"
+            margin="normal"
             required
           />
           <TextField
@@ -89,14 +91,18 @@ function FormDialog() {
             label="Link"
             fullWidth
             defaultValue={formDialogState.meeting?.link}
+            variant="outlined"
+            margin="normal"
             required
           />
           <TextField
             name="password"
             inputRef={passwordInputRef}
-            label="Passwort"
+            label="Password"
             fullWidth
             defaultValue={formDialogState.meeting?.password}
+            variant="outlined"
+            margin="normal"
             required
           />
         </DialogContent>
@@ -111,6 +117,6 @@ function FormDialog() {
       </form>
     </Dialog>
   );
-}
+};
 
 export default FormDialog;
