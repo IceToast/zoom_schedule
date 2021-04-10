@@ -1,4 +1,4 @@
-import {fetchMeetings} from './actions.loadMeetings';
+import {fetchMeetings} from './actions.fetchMeetings';
 export const EDIT_MEETING = 'EDIT_MEETING';
 
 export const editMeeting = putData => {

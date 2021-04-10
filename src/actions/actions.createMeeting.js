@@ -1,4 +1,4 @@
-import {fetchMeetings} from './actions.loadMeetings';
+import {fetchMeetings} from './actions.fetchMeetings';
 export const CREATE_MEETING = 'CREATE_MEETING';
 
 export const createMeeting = postData => {

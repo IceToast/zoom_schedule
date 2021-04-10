@@ -1,4 +1,4 @@
-import {fetchMeetings} from './actions.loadMeetings';
+import {fetchMeetings} from './actions.fetchMeetings';
 export const DELETE_MEETING = 'DELETE_MEETING';
 
 export const deleteMeeting = (deleteMeeting, deleteDay) => {
