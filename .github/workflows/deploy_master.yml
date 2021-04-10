@@ -1,0 +1,32 @@
+name: Build and Deploy master
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  build_and_publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: yarn install and build
+        run: |
+          yarn install
+          yarn build
+      - name: Archive production artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: dist-without-markdown
+          path: |
+            build
+            !build/**/*.md
+      - name: Deploy to Server
+        uses: easingthemes/ssh-deploy@v2.1.5
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.RSYNC_DEPLOY_SECRET }}
+          ARGS: '-rltgoDzvO --delete'
+          SOURCE: 'build/'
+          REMOTE_HOST: ${{ secrets.RSYNC_DEPLOY_HOST }}
+          REMOTE_USER: ${{ secrets.RSYNC_DEPLOY_USER }}
+          TARGET: ${{ secrets.RSYNC_DEPLOY_DEST_PATH }}
