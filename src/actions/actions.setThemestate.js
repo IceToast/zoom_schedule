@@ -1,6 +1,7 @@
-export const SET_THEME_STATE = 'SET_THEME_STATE';
+import {createAction} from '@reduxjs/toolkit';
 
-export const setThemeState = (payload) => {
-    payload.type = SET_THEME_STATE;
-    return payload;
-}
+export const setTheme = createAction('setTheme', setState => ({
+  payload: {
+    themeState: setState,
+  },
+}));
