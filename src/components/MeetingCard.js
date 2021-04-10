@@ -1,9 +1,9 @@
 import React from 'react';
-import {Card, Typography, Link, makeStyles, IconButton} from '@material-ui/core';
-import {useDispatch} from 'react-redux';
-import {deleteMeeting} from '../actions/actions.meeting';
-import {Delete as DeleteIcon, Edit as EditIcon} from '@material-ui/icons';
-import {setFormDialogState} from '../actions/actions.setFormDialogState';
+import { Card, Typography, Link, makeStyles, IconButton } from '@material-ui/core';
+import { useDispatch } from 'react-redux';
+import { deleteMeeting } from '../actions/actions.meeting';
+import { Delete as DeleteIcon, Edit as EditIcon } from '@material-ui/icons';
+import { setFormDialogState } from '../actions/actions.setFormDialogState';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -30,7 +30,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const MeetingCard = ({meeting, day}) => {
+const MeetingCard = ({ meeting, day }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
 
@@ -80,7 +80,7 @@ const MeetingCard = ({meeting, day}) => {
           {meeting.link}
         </Link>
       </Typography>
-      <Typography>Passwort: {meeting.password}</Typography>
+      <Typography>Password: {meeting.password}</Typography>
     </Card>
   );
 };

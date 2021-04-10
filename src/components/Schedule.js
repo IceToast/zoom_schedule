@@ -6,7 +6,7 @@ const Schedule = () => {
   const days = useSelector(state => state.meetings.days);
 
   // use dummy data in development mode
-  if (process.env.NODE_ENV !== 'development') {
+  if (process.env.NODE_ENV === 'development') {
     return (
       <DaysContainer
         days={[
@@ -32,7 +32,7 @@ const Schedule = () => {
               },
             ],
           },
-          { name: 'Wedensday' },
+          { name: 'Wednesday' },
           {
             name: 'Thursday',
             meetings: [
@@ -67,6 +67,6 @@ const Schedule = () => {
     );
   }
 
-  return <DaysContainer days={days}></DaysContainer>;
+  return <DaysContainer days={days} />;
 };
 export default Schedule;

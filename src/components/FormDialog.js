@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, { useRef, useState } from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -7,9 +7,9 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Alert from '@material-ui/lab/Alert';
-import {useDispatch, useSelector} from 'react-redux';
-import {createMeeting, editMeeting} from '../actions/actions.meeting';
-import {setFormDialogState} from '../actions/actions.setFormDialogState';
+import { useDispatch, useSelector } from 'react-redux';
+import { createMeeting, editMeeting } from '../actions/actions.meeting';
+import { setFormDialogState } from '../actions/actions.setFormDialogState';
 
 function FormDialog() {
   const formDialogState = useSelector(state => state.formDialog);
@@ -48,7 +48,7 @@ function FormDialog() {
       });
     }
 
-    const {error} = await dispatch(action);
+    const { error } = await dispatch(action);
 
     if (error) {
       setError(true);
@@ -69,8 +69,8 @@ function FormDialog() {
     <Dialog open={formDialogState.open} onClose={formDialogState.onClose} aria-labelledby="form-dialog-title">
       {loading && <LinearProgress />}
       <form onSubmit={submitData}>
-        <DialogTitle id="form-dialog-title">Erstelle/bearbeite ein Meeting</DialogTitle>
-        {error && <Alert severity="error">Ein Fehler ist aufgetaucht. Bitte prüfe deine Eingaben.</Alert>}
+        <DialogTitle id="form-dialog-title">Create/Edit a Meeting</DialogTitle>
+        {error && <Alert severity="error">An Error has occurred. Please check your input</Alert>}
         <DialogContent>
           <input hidden name="id" value={formDialogState.meeting?._id} ref={idInputRef} />
           <input hidden name="day" value={formDialogState.meeting?.day} ref={dayInputRef} />
@@ -102,10 +102,10 @@ function FormDialog() {
         </DialogContent>
         <DialogActions>
           <Button disabled={loading} onClick={formDialogState.onClose}>
-            Abbrechen
+            Cancel
           </Button>
           <Button disabled={loading} type="submit" color="primary" variant="contained">
-            Bestätigen
+            Confirm
           </Button>
         </DialogActions>
       </form>
