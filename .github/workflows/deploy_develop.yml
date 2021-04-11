@@ -2,7 +2,7 @@ name: Build and Deploy develop
 
 on:
   push:
-    branches: [develop]
+    branches: []
 
 jobs:
   build_and_publish:
