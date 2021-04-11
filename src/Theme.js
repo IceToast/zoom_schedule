@@ -8,6 +8,9 @@ const mainColor = '#ffffff';
 export const getColorPalette = (color, type) => ({
   type,
   primary: blue,
+  background: {
+    default: type === 'dark' ? '#303030' : '#fff',
+  },
 });
 
 const theme = config => {
@@ -15,6 +18,20 @@ const theme = config => {
   return responsiveFontSizes(
     createMuiTheme({
       palette: colorPalette,
+      overrides: {
+        MuiCssBaseline: {
+          // Set body background color to primary color -> to fix iOS PWA Statusbar color
+          // Override root element background color to default background color of theme type
+          '@global': {
+            body: {
+              backgroundColor: blue[500],
+              '& #root': {
+                backgroundColor: colorPalette.type === 'dark' ? '#303030' : '#fff',
+              },
+            },
+          },
+        },
+      },
       props: {
         MuiPaper: { elevation: 1 },
       },
