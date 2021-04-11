@@ -38,7 +38,7 @@ registerRoute(
       return false;
     }
     // Return false for access on api
-    if (url.pathname.includes('api')) {
+    if (url.pathname.statsWith('/api')) {
       return false;
     }
     // If this looks like a URL for a resource, because it contains // a file extension, skip.
