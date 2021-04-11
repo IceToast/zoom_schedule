@@ -150,11 +150,7 @@ const App = () => {
                   </Menu>
                 </>
               ) : (
-                <IconButton
-                  className={classes.userButton}
-                  onClick={openUserDropdownMenu}
-                  color="secondary.main"
-                  variant="contained">
+                <IconButton className={classes.userButton} color="secondary.main" variant="contained">
                   <AccountCircleIcon className={classes.avatarIcon} />
                 </IconButton>
               )}
