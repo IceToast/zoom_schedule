@@ -36,7 +36,9 @@ registerRoute(
     if (url.pathname.startsWith('/_')) {
       return false;
     } // If this looks like a URL for a resource, because it contains // a file extension, skip.
-
+    if (url.pathname.includes('/api')) {
+      return false;
+    } // Return false for access on api
     if (url.pathname.match(fileExtensionRegexp)) {
       return false;
     } // Return true to signal that we want to use the handler.
@@ -63,7 +65,7 @@ registerRoute(
 
 // This allows the web app to trigger skipWaiting via
 // registration.waiting.postMessage({type: 'SKIP_WAITING'})
-self.addEventListener('message', (event) => {
+self.addEventListener('message', event => {
   if (event.data && event.data.type === 'SKIP_WAITING') {
     self.skipWaiting();
   }
