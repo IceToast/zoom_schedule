@@ -78,7 +78,7 @@ const App = () => {
     }
   }
 
-  function handleDarkModeButtonClick() {
+  const handleDarkModeButtonClick = () => {
     if (themePaletteType === 'dark') {
       localStorage.removeItem('themePaletteType');
       dispatch(setThemeState('light'));
@@ -86,19 +86,13 @@ const App = () => {
       localStorage.setItem('themePaletteType', 'dark');
       dispatch(setThemeState('dark'));
     }
-  }
+  };
 
-  function openUserDropdownMenu(e) {
-    setDropdownAnchorEl(e.currentTarget);
-  }
+  const openUserDropdownMenu = e => setDropdownAnchorEl(e.currentTarget);
 
-  function closeUserDropdownMenu() {
-    setDropdownAnchorEl(null);
-  }
+  const closeUserDropdownMenu = () => setDropdownAnchorEl(null);
 
-  function pushToPathname(pathname) {
-    window.location.pathname = pathname;
-  }
+  const pushToPathname = pathname => (window.location.pathname = pathname);
 
   if (!isLoggedIn) {
     return <SignIn />;
