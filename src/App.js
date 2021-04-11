@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { AppBar, Container, IconButton, Typography } from '@material-ui/core';
+import { AppBar, Container, IconButton, Menu, MenuItem, Typography } from '@material-ui/core';
 import { Schedule, SignIn } from './components';
 import { useDispatch, useSelector } from 'react-redux';
 import { setThemeState } from './actions/actions.setThemeState';
@@ -33,11 +33,15 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.primary.contrastText,
     fontSize: theme.spacing(4),
   },
+  logoutButton: {
+    color: theme.palette.error.main,
+  },
 }));
 
 const App = () => {
   const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
   const themePaletteType = useSelector(state => state.theme.paletteType);
+  const [dropdownAnchorEl, setDropdownAnchorEl] = useState(null);
   const classes = useStyles({ themePaletteType });
   const dispatch = useDispatch();
 
@@ -70,6 +74,18 @@ const App = () => {
     }
   }
 
+  function openUserDropdownMenu(e) {
+    setDropdownAnchorEl(e.currentTarget);
+  }
+
+  function closeUserDropdownMenu() {
+    setDropdownAnchorEl(null);
+  }
+
+  function pushToPathname(pathname) {
+    window.location.pathname = pathname;
+  }
+
   if (!isLoggedIn) {
     return <SignIn />;
   } else {
@@ -92,9 +108,27 @@ const App = () => {
                   <BrightIcon className={classes.darkModeIcons} />
                 )}
               </IconButton>
-              <IconButton className={classes.userButton} color="secondary.main" variant="contained">
+              <IconButton
+                className={classes.userButton}
+                onClick={openUserDropdownMenu}
+                color="secondary.main"
+                variant="contained">
                 <AccountCircleIcon className={classes.avatarIcon} />
               </IconButton>
+              <Menu
+                id="user-menu"
+                anchorEl={dropdownAnchorEl}
+                keepMounted
+                open={Boolean(dropdownAnchorEl)}
+                onClose={closeUserDropdownMenu}>
+                <MenuItem disabled>Max Mustermann</MenuItem>
+                <MenuItem onClick={() => pushToPathname('/api/user/logout')} className={classes.logoutButton}>
+                  Logout
+                </MenuItem>
+                <MenuItem disabled onClick={() => pushToPathname('/api/user/logoutall')} className={classes.logoutButton}>
+                  Logout from all devices
+                </MenuItem>
+              </Menu>
             </div>
           </Container>
         </AppBar>
