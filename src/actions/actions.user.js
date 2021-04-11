@@ -5,3 +5,12 @@ export const setLoginState = createAction('setLoginState', loggedIn => ({
     loginState: loggedIn,
   },
 }));
+
+export const getUserData = createAction('getUserData', _ => ({
+  payload: {
+    request: {
+      url: '/user',
+      method: 'GET',
+    },
+  },
+}));

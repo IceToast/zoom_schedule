@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { AppBar, Container, IconButton, Typography } from '@material-ui/core';
+import { AppBar, Avatar, Container, IconButton, Menu, MenuItem, Typography } from '@material-ui/core';
 import { Schedule, SignIn } from './components';
 import { useDispatch, useSelector } from 'react-redux';
 import { setThemeState } from './actions/actions.setThemeState';
 import { fetchMeetings } from './actions/actions.meeting';
-import { setLoginState } from './actions/actions.auth';
+import { setLoginState, getUserData } from './actions/actions.user';
 import { AccountCircle as AccountCircleIcon, Brightness7 as DarkIcon, Brightness4 as BrightIcon } from '@material-ui/icons';
 
 const useStyles = makeStyles(theme => ({
@@ -33,11 +33,17 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.primary.contrastText,
     fontSize: theme.spacing(4),
   },
+  logoutButton: {
+    color: theme.palette.error.main,
+  },
 }));
 
 const App = () => {
-  const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
+  const isLoggedIn = useSelector(state => state.user.isLoggedIn);
   const themePaletteType = useSelector(state => state.theme.paletteType);
+  const [dropdownAnchorEl, setDropdownAnchorEl] = useState(null);
+  const userData = useSelector(state => state.user.userData);
+
   const classes = useStyles({ themePaletteType });
   const dispatch = useDispatch();
 
@@ -57,10 +63,12 @@ const App = () => {
         dispatch(setLoginState(true));
       }
     });
+
+    dispatch(getUserData());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  function handleDarkModeButtonClick() {
+  const handleDarkModeButtonClick = () => {
     if (themePaletteType === 'dark') {
       localStorage.removeItem('themePaletteType');
       dispatch(setThemeState('light'));
@@ -68,7 +76,13 @@ const App = () => {
       localStorage.setItem('themePaletteType', 'dark');
       dispatch(setThemeState('dark'));
     }
-  }
+  };
+
+  const openUserDropdownMenu = e => setDropdownAnchorEl(e.currentTarget);
+
+  const closeUserDropdownMenu = () => setDropdownAnchorEl(null);
+
+  const pushToPathname = pathname => (window.location.pathname = pathname);
 
   if (!isLoggedIn) {
     return <SignIn />;
@@ -92,9 +106,38 @@ const App = () => {
                   <BrightIcon className={classes.darkModeIcons} />
                 )}
               </IconButton>
-              <IconButton className={classes.userButton} color="secondary.main" variant="contained">
-                <AccountCircleIcon className={classes.avatarIcon} />
-              </IconButton>
+              {userData ? (
+                <>
+                  <IconButton
+                    className={classes.userButton}
+                    onClick={openUserDropdownMenu}
+                    color="secondary.main"
+                    variant="contained">
+                    <Avatar className={classes.avatarIcon} alt={userData.username} src={userData.avatarurl} />
+                  </IconButton>
+                  <Menu
+                    id="user-menu"
+                    anchorEl={dropdownAnchorEl}
+                    keepMounted
+                    open={Boolean(dropdownAnchorEl)}
+                    onClose={closeUserDropdownMenu}>
+                    <MenuItem disabled>{userData.username}</MenuItem>
+                    <MenuItem onClick={() => pushToPathname('/api/user/logout')} className={classes.logoutButton}>
+                      Logout
+                    </MenuItem>
+                    <MenuItem
+                      disabled
+                      onClick={() => pushToPathname('/api/user/logoutall')}
+                      className={classes.logoutButton}>
+                      Logout from all devices
+                    </MenuItem>
+                  </Menu>
+                </>
+              ) : (
+                <IconButton className={classes.userButton} color="secondary.main" variant="contained">
+                  <AccountCircleIcon className={classes.avatarIcon} />
+                </IconButton>
+              )}
             </div>
           </Container>
         </AppBar>

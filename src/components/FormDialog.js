@@ -23,7 +23,7 @@ const FormDialog = () => {
   const linkInputRef = useRef();
   const passwordInputRef = useRef();
 
-  async function submitData(e) {
+  const submitData = async e => {
     e.preventDefault();
     setLoading(true);
     setError(false);
@@ -63,7 +63,7 @@ const FormDialog = () => {
       );
     }
     setLoading(false);
-  }
+  };
 
   return (
     <Dialog open={formDialogState.open} onClose={formDialogState.onClose} maxWidth="xs" aria-labelledby="form-dialog-title">

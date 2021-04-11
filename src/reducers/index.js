@@ -1,11 +1,11 @@
 import themeReducer from './reducer.theme';
-import authReducer from './reducer.auth';
+import userReducer from './reducer.user';
 import formDialogReducer from './reducer.formDialog';
 import meetingReducer from './reducer.meeting';
 
 const reducers = {
   theme: themeReducer,
-  auth: authReducer,
+  user: userReducer,
   formDialog: formDialogReducer,
   meetings: meetingReducer,
 };

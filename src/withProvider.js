@@ -1,5 +1,5 @@
 import React from 'react';
-import Theme from './Theme';
+import WithThemeProvider from './Theme';
 
 /**
  * Utility Higher Order Component factory. Returns HOC which takes another
@@ -8,9 +8,9 @@ import Theme from './Theme';
 const withProvider = ({ store, StoreProvider }) => WrappedComponent => props => {
   return (
     <StoreProvider store={store}>
-      <Theme>
+      <WithThemeProvider>
         <WrappedComponent {...props} />
-      </Theme>
+      </WithThemeProvider>
     </StoreProvider>
   );
 };

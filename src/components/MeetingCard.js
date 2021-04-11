@@ -25,7 +25,7 @@ const useStyles = makeStyles(theme => ({
     right: theme.spacing(4),
     top: theme.spacing(0.3),
   },
-  mettingName: {
+  meetingName: {
     fontWeight: 'bold',
   },
 }));
@@ -34,14 +34,14 @@ const MeetingCard = ({ meeting, day }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
 
-  function getDeleteConfirm() {
-    const confirmed = window.confirm('Bist du dir sicher?');
+  const getDeleteConfirm = () => {
+    const confirmed = window.confirm('Are you sure?');
     if (confirmed) {
       dispatch(deleteMeeting(meeting, day));
     }
-  }
+  };
 
-  function openDialogForMeetingEdit() {
+  const openDialogForMeetingEdit = () => {
     dispatch(
       setFormDialogState({
         open: true,
@@ -53,9 +53,9 @@ const MeetingCard = ({ meeting, day }) => {
         },
       })
     );
-  }
+  };
 
-  function closeDialog() {
+  const closeDialog = () => {
     dispatch(
       setFormDialogState({
         open: false,
@@ -64,7 +64,7 @@ const MeetingCard = ({ meeting, day }) => {
         meeting: {},
       })
     );
-  }
+  };
 
   return (
     <Card className={classes.root}>
@@ -74,7 +74,7 @@ const MeetingCard = ({ meeting, day }) => {
       <IconButton className={classes.deleteButton} onClick={getDeleteConfirm} size="small">
         <DeleteIcon />
       </IconButton>
-      <Typography className={classes.mettingName}>{meeting.name}</Typography>
+      <Typography className={classes.meetingName}>{meeting.name}</Typography>
       <Typography>
         <Link href={meeting.link} target="_blank">
           {meeting.link}
