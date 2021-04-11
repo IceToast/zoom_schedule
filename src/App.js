@@ -7,7 +7,6 @@ import { setThemeState } from './actions/actions.setThemeState';
 import { fetchMeetings } from './actions/actions.meeting';
 import { setLoginState } from './actions/actions.auth';
 import { AccountCircle as AccountCircleIcon, Brightness7 as DarkIcon, Brightness4 as BrightIcon } from '@material-ui/icons';
-import { deleteCookie } from './util/cookieHandlers';
 
 const useStyles = makeStyles(theme => ({
   appBar: {
@@ -83,9 +82,8 @@ const App = () => {
     setDropdownAnchorEl(null);
   }
 
-  function logoutUser() {
-    deleteCookie('session_id');
-    dispatch(setLoginState(false));
+  function pushToPathname(pathname) {
+    window.location.pathname = pathname;
   }
 
   if (!isLoggedIn) {
@@ -124,8 +122,11 @@ const App = () => {
                 open={Boolean(dropdownAnchorEl)}
                 onClose={closeUserDropdownMenu}>
                 <MenuItem disabled>Max Mustermann</MenuItem>
-                <MenuItem onClick={logoutUser} className={classes.logoutButton}>
+                <MenuItem onClick={() => pushToPathname('/api/user/logout')} className={classes.logoutButton}>
                   Logout
+                </MenuItem>
+                <MenuItem onClick={() => pushToPathname('/api/user/logoutall')} className={classes.logoutButton}>
+                  Logout from all devices
                 </MenuItem>
               </Menu>
             </div>
