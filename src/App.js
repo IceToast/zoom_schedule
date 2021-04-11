@@ -125,7 +125,7 @@ const App = () => {
                 <MenuItem onClick={() => pushToPathname('/api/user/logout')} className={classes.logoutButton}>
                   Logout
                 </MenuItem>
-                <MenuItem onClick={() => pushToPathname('/api/user/logoutall')} className={classes.logoutButton}>
+                <MenuItem disabled onClick={() => pushToPathname('/api/user/logoutall')} className={classes.logoutButton}>
                   Logout from all devices
                 </MenuItem>
               </Menu>
