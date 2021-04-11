@@ -5,9 +5,8 @@ import { Schedule, SignIn } from './components';
 import { useDispatch, useSelector } from 'react-redux';
 import { setThemeState } from './actions/actions.setThemeState';
 import { fetchMeetings } from './actions/actions.meeting';
-import { setLoginState } from './actions/actions.auth';
+import { setLoginState, getUserData } from './actions/actions.user';
 import { AccountCircle as AccountCircleIcon, Brightness7 as DarkIcon, Brightness4 as BrightIcon } from '@material-ui/icons';
-import axios from 'axios';
 
 const useStyles = makeStyles(theme => ({
   appBar: {
@@ -40,10 +39,10 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const App = () => {
-  const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
+  const isLoggedIn = useSelector(state => state.user.isLoggedIn);
   const themePaletteType = useSelector(state => state.theme.paletteType);
   const [dropdownAnchorEl, setDropdownAnchorEl] = useState(null);
-  const [user, setUser] = useState();
+  const userData = useSelector(state => state.user.userData);
 
   const classes = useStyles({ themePaletteType });
   const dispatch = useDispatch();
@@ -65,18 +64,9 @@ const App = () => {
       }
     });
 
-    loadUser();
+    dispatch(getUserData());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  async function loadUser() {
-    try {
-      const { data: user } = await axios.get('/api/user');
-      setUser(user);
-    } catch (err) {
-      console.error(err);
-    }
-  }
 
   const handleDarkModeButtonClick = () => {
     if (themePaletteType === 'dark') {
@@ -116,14 +106,14 @@ const App = () => {
                   <BrightIcon className={classes.darkModeIcons} />
                 )}
               </IconButton>
-              {user ? (
+              {userData ? (
                 <>
                   <IconButton
                     className={classes.userButton}
                     onClick={openUserDropdownMenu}
                     color="secondary.main"
                     variant="contained">
-                    <Avatar className={classes.avatarIcon} alt={user.username} src={user.avatarurl} />
+                    <Avatar className={classes.avatarIcon} alt={userData.username} src={userData.avatarurl} />
                   </IconButton>
                   <Menu
                     id="user-menu"
@@ -131,7 +121,7 @@ const App = () => {
                     keepMounted
                     open={Boolean(dropdownAnchorEl)}
                     onClose={closeUserDropdownMenu}>
-                    <MenuItem disabled>{user.username}</MenuItem>
+                    <MenuItem disabled>{userData.username}</MenuItem>
                     <MenuItem onClick={() => pushToPathname('/api/user/logout')} className={classes.logoutButton}>
                       Logout
                     </MenuItem>
