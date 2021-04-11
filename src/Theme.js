@@ -46,7 +46,7 @@ const theme = config => {
   );
 };
 
-function Theme(props) {
+const WithThemeProvider = props => {
   const themePaletteType = useSelector(state => state.theme.paletteType);
   const themeInstance = theme({ type: themePaletteType });
 
@@ -56,6 +56,6 @@ function Theme(props) {
       {props.children}
     </ThemeProvider>
   );
-}
+};
 
-export default Theme;
+export default WithThemeProvider;
