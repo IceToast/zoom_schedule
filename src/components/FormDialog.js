@@ -103,7 +103,6 @@ const FormDialog = () => {
             defaultValue={formDialogState.meeting?.password}
             variant="outlined"
             margin="normal"
-            required
           />
         </DialogContent>
         <DialogActions>

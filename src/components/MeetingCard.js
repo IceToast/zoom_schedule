@@ -66,6 +66,11 @@ const MeetingCard = ({ meeting, day }) => {
     );
   };
 
+  const join = async () => {
+    await navigator.clipboard.writeText(meeting.password);
+    window.open(meeting.link, '_blank');
+  };
+
   return (
     <Card className={classes.root}>
       <IconButton className={classes.editButton} onClick={openDialogForMeetingEdit} size="small">
@@ -76,8 +81,8 @@ const MeetingCard = ({ meeting, day }) => {
       </IconButton>
       <Typography className={classes.meetingName}>{meeting.name}</Typography>
       <Typography>
-        <Link href={meeting.link} target="_blank">
-          {meeting.link}
+        <Link onClick={join} target="_blank">
+          Join Link
         </Link>
       </Typography>
       <Typography>Password: {meeting.password}</Typography>
