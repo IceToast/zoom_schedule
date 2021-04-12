@@ -36,6 +36,16 @@ const useStyles = makeStyles(theme => ({
   logoutButton: {
     color: theme.palette.error.main,
   },
+  appBackground: {
+    position: 'absolute',
+    backgroundColor: theme.palette.backgroundColor,
+    width: '200vw',
+    height: '200vh',
+  },
+  appBackgroundWrap: {
+    position: 'absolute',
+    overflow: 'hidden',
+  },
 }));
 
 const App = () => {
@@ -89,6 +99,9 @@ const App = () => {
   } else {
     return (
       <>
+        <div className={classes.appBackgroundWrap}>
+          <div className={classes.appBackground} />
+        </div>
         <AppBar position="static" className={classes.appBar}>
           <Container className={classes.appBarContainer}>
             <Typography variant="h4" className={classes.appTitle}>
