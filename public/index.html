@@ -19,13 +19,22 @@
     <meta name="msapplication-TileColor" content="#2b5797" />
     <meta name="msapplication-config" content="%PUBLIC_URL%/browserconfig.xml" />
     <style>
+      html {
+        position: fixed;
+        height: 100%;
+        overflow: hidden;
+      }
       body {
         margin: 0;
       }
+
       #root {
         position: relative;
-        min-height: 100vh;
-        width: 100%;
+        width: 100vw;
+        height: 100vh;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        -webkit-overflow-scrolling: touch;
       }
     </style>
   </head>
