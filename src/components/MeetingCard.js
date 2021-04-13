@@ -85,7 +85,7 @@ const MeetingCard = ({ meeting, day }) => {
           Join Link
         </Link>
       </Typography>
-      <Typography>Password: {meeting.password}</Typography>
+      <Typography>Password: {meeting.password?}</Typography>
     </Card>
   );
 };
