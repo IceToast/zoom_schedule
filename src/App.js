@@ -6,7 +6,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setThemeState } from './actions/actions.setThemeState';
 import { fetchMeetings } from './actions/actions.meeting';
 import { setLoginState, getUserData } from './actions/actions.user';
-import { AccountCircle as AccountCircleIcon, Brightness7 as DarkIcon, Brightness4 as BrightIcon } from '@material-ui/icons';
+import {
+  AccountCircle as AccountCircleIcon,
+  Brightness7 as DarkIcon,
+  Brightness4 as BrightIcon,
+  SystemUpdateAlt as SystemUpdateAltIcon,
+} from '@material-ui/icons';
+import { useReactPWAInstall } from 'react-pwa-install';
 
 const useStyles = makeStyles(theme => ({
   appBar: {
@@ -29,6 +35,10 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.primary.contrastText,
     fontSize: theme.spacing(3),
   },
+  installIcon: {
+    color: theme.palette.primary.contrastText,
+    fontSize: theme.spacing(3),
+  },
   avatarIcon: {
     color: theme.palette.primary.contrastText,
     fontSize: theme.spacing(4),
@@ -46,6 +56,22 @@ const App = () => {
 
   const classes = useStyles({ themePaletteType });
   const dispatch = useDispatch();
+  const { pwaInstall, supported, isInstalled } = useReactPWAInstall();
+
+  const handleClick = () => {
+    pwaInstall({
+      title: 'Install Zoom Schedule as App',
+      icon: '/images/android-chrome-192x192.png',
+      features: (
+        <ul>
+          <li>Add meetings</li>
+          <li>Edit meetings</li>
+          <li>Delete meetings</li>
+        </ul>
+      ),
+      description: 'Save your meetings at one place - Access meetings from every device everywhere',
+    }).then(() => alert('App installed successfully or instructions for install shown'));
+  };
 
   useEffect(() => {
     dispatch(fetchMeetings()).then(({ error }) => {
@@ -95,6 +121,9 @@ const App = () => {
               Zoom Schedule
             </Typography>
             <div>
+              <IconButton onClick={handleClick} className={classes.userButton} color="secondary.main" variant="contained">
+                <SystemUpdateAltIcon className={classes.installIcon} />
+              </IconButton>
               <IconButton
                 onClick={handleDarkModeButtonClick}
                 className={classes.userButton}
