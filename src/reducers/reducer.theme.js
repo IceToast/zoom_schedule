@@ -3,7 +3,7 @@ import { setThemeState } from '../actions/actions.setThemeState';
 
 export default createReducer(
   {
-    paletteType: localStorage.getItem('themePaletteType') || 'light',
+    paletteType: localStorage.getItem('themePaletteType') || 'dark',
   },
   {
     [setThemeState]: (state, action) => {

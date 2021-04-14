@@ -1,13 +1,18 @@
 import { createMuiTheme, responsiveFontSizes, ThemeProvider } from '@material-ui/core/styles';
-import blue from '@material-ui/core/colors/blue';
 import { useSelector } from 'react-redux';
 import { CssBaseline } from '@material-ui/core';
+import { purple, blue } from '@material-ui/core/colors';
 
 const mainColor = '#ffffff';
 
 export const getColorPalette = (color, type) => ({
   type,
-  primary: blue,
+  primary: {
+    main: blue[500],
+  },
+  secondary: {
+    main: purple[400],
+  },
   background: {
     default: type === 'dark' ? '#303030' : '#fff',
   },
