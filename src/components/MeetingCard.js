@@ -1,18 +1,33 @@
 import React from 'react';
-import { Card, Typography, Link, makeStyles, IconButton } from '@material-ui/core';
+import { Card, Typography, makeStyles, Button, ButtonGroup, Grid } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
 import { deleteMeeting } from '../actions/actions.meeting';
-import { Delete as DeleteIcon, Edit as EditIcon } from '@material-ui/icons';
+import { PlayArrow, Delete, Edit } from '@material-ui/icons';
 import { setFormDialogState } from '../actions/actions.setFormDialogState';
 
 const useStyles = makeStyles(theme => ({
   root: {
     position: 'relative',
-    padding: theme.spacing(3, 2, 1, 1),
+    padding: theme.spacing(1, 1, 1, 1),
+    borderTop: `0.25em solid ${theme.palette.primary.main}`,
 
     '&:not(:last-child)': {
-      marginBottom: theme.spacing(1),
+      marginBottom: theme.spacing(2),
     },
+    '& Button': {
+      backgroundColor: theme.palette.primary.main,
+      borderRadius: '5em',
+      height: '2em',
+      width: '50%',
+      marginTop: theme.spacing(1),
+      color: 'white',
+      '&.MuiButton-outlined': {
+        border: '1px solid rgba(255, 255, 255, 0.23)',
+      },
+    },
+  },
+  meetingWrapper: {
+    width: '100%',
   },
   deleteButton: {
     position: 'absolute',
@@ -27,6 +42,14 @@ const useStyles = makeStyles(theme => ({
   },
   meetingName: {
     fontWeight: 'bold',
+  },
+  joinButton: {
+    backgroundColor: theme.palette.primary.main,
+    borderRadius: '5em',
+    height: '2em',
+  },
+  joinIcon: {
+    marginRight: theme.spacing(0.5),
   },
 }));
 
@@ -73,19 +96,22 @@ const MeetingCard = ({ meeting, day }) => {
 
   return (
     <Card className={classes.root}>
-      <IconButton className={classes.editButton} onClick={openDialogForMeetingEdit} size="small">
-        <EditIcon />
-      </IconButton>
-      <IconButton className={classes.deleteButton} onClick={getDeleteConfirm} size="small">
-        <DeleteIcon />
-      </IconButton>
-      <Typography className={classes.meetingName}>{meeting.name}</Typography>
-      <Typography>
-        <Link onClick={join} target="_blank">
-          Join Link
-        </Link>
-      </Typography>
-      <Typography>Password: {meeting.password && meeting.password} </Typography>
+      <Grid container direction="column" justify="center" alignContent="center">
+        <Typography className={classes.meetingName}>{meeting.name}</Typography>
+        <Button className={classes.joinButton} onClick={join} size="large">
+          <PlayArrow className={classes.joinIcon} />
+          Join
+        </Button>
+        <ButtonGroup className={classes.metaButtons} size="large">
+          <Button onClick={openDialogForMeetingEdit}>
+            <Edit />
+          </Button>
+          <Button onClick={getDeleteConfirm}>
+            <Delete />
+          </Button>
+        </ButtonGroup>
+        <Typography>Password: {meeting.password}</Typography>
+      </Grid>
     </Card>
   );
 };
