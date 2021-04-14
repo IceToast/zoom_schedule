@@ -96,7 +96,7 @@ const App = () => {
 
   const handleDarkModeButtonClick = () => {
     if (themePaletteType === 'dark') {
-      localStorage.removeItem('themePaletteType');
+      localStorage.setItem('themePaletteType', 'light');
       dispatch(setThemeState('light'));
     } else {
       localStorage.setItem('themePaletteType', 'dark');
