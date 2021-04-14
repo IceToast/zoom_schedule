@@ -121,9 +121,11 @@ const App = () => {
               Zoom Schedule
             </Typography>
             <div>
-              <IconButton onClick={handleClick} className={classes.userButton} color="secondary.main" variant="contained">
-                <SystemUpdateAltIcon className={classes.installIcon} />
-              </IconButton>
+              {supported() && !isInstalled() && (
+                <IconButton onClick={handleClick} className={classes.userButton} color="secondary.main" variant="contained">
+                  <SystemUpdateAltIcon className={classes.installIcon} />
+                </IconButton>
+              )}
               <IconButton
                 onClick={handleDarkModeButtonClick}
                 className={classes.userButton}
