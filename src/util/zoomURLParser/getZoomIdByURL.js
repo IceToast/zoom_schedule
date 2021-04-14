@@ -1,4 +1,4 @@
-export function getZoomIdByURL(url) {
+export const getZoomIdByURLorId = url => {
   const pattern = /\d{11}|\d{10}/;
   const result = url.match(pattern);
 
@@ -7,4 +7,4 @@ export function getZoomIdByURL(url) {
   }
 
   return ''; // null
-}
+};
