@@ -134,7 +134,7 @@ const App = () => {
                   </Menu>
                 </>
               ) : (
-                <IconButton className={classes.userButton} color="secondary.main" variant="contained">
+                <IconButton className={classes.userButton} color="secondary.main" variant="contained" disabled>
                   <AccountCircleIcon className={classes.avatarIcon} />
                 </IconButton>
               )}
