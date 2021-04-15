@@ -97,7 +97,7 @@ const MeetingCard = ({ meeting, day }) => {
   const join = async () => {
     await navigator.clipboard.writeText(meeting.password);
     setOpenSnackbar(true);
-    //window.open(meeting.link, '_blank');
+    window.open(meeting.link, '_blank');
   };
 
   const handleSnackbarClose = (event, reason) => {
