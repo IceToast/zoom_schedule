@@ -1,5 +1,6 @@
-import React from 'react';
-import { Card, Typography, makeStyles, Button, ButtonGroup, Grid } from '@material-ui/core';
+import React, { useState } from 'react';
+import { Card, Typography, makeStyles, Button, ButtonGroup, Grid, Snackbar } from '@material-ui/core';
+import MuiAlert from '@material-ui/lab/Alert';
 import { useDispatch } from 'react-redux';
 import { deleteMeeting } from '../actions/actions.meeting';
 import { PlayArrow, Delete, Edit } from '@material-ui/icons';
@@ -12,6 +13,9 @@ const useStyles = makeStyles(theme => ({
     borderTop: `0.25em solid ${theme.palette.primary.main}`,
     '&:not(:last-child)': {
       marginBottom: theme.spacing(2),
+    },
+    '& > * + *': {
+      marginTop: theme.spacing(2),
     },
   },
   buttonWrapper: {
@@ -49,9 +53,14 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
+
 const MeetingCard = ({ meeting, day }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const [openSnackbar, setOpenSnackbar] = useState(false);
 
   const getDeleteConfirm = () => {
     const confirmed = window.confirm('Please confirm to delete Meeting!');
@@ -87,18 +96,33 @@ const MeetingCard = ({ meeting, day }) => {
 
   const join = async () => {
     await navigator.clipboard.writeText(meeting.password);
-    window.open(meeting.link, '_blank');
+    setOpenSnackbar(true);
+    //window.open(meeting.link, '_blank');
+  };
+
+  const handleSnackbarClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpenSnackbar(false);
   };
 
   return (
     <Card className={classes.root}>
       <Grid container direction="column" justify="center" alignItems="center" alignContent="center">
         <Typography className={classes.meetingName}>{meeting.name}</Typography>
+        <Snackbar open={openSnackbar} autoHideDuration={10000} onClose={handleSnackbarClose}>
+          <Alert onClose={handleSnackbarClose} severity="success">
+            Meeting password: "{meeting.password}" copied to clipboard!
+          </Alert>
+        </Snackbar>
         <div className={classes.buttonWrapper}>
           <Button className={classes.joinButton} onClick={join} size="large">
             <PlayArrow className={classes.joinIcon} />
             Join
           </Button>
+
           <ButtonGroup className={classes.metaButtons} size="large">
             <Button onClick={openDialogForMeetingEdit}>
               <Edit />
