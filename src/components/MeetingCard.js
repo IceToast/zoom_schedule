@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
       marginBottom: theme.spacing(2),
     },
     '& > * + *': {
-      marginTop: theme.spacing(2),
+      marginTop: theme.spacing(1),
     },
   },
   buttonWrapper: {
@@ -53,7 +53,6 @@ const useStyles = makeStyles(theme => ({
   },
   bar: {
     transition: 'transform 0.05s linear',
-    margin: '-8',
   },
 }));
 
