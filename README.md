@@ -5,6 +5,11 @@
 
 This Schedule helps students to keep all their Zoom-Links and passwords at one place and access them from every device.
 
+# Demo
+This Demo is using the [Zoom-Schedule Backend](https://github.com/IceToast/zoom_schedule_backend_go). It's not a Demo, but a production build with a persistent database. There is no need to host this app yourself.
+
+[DEMO](https://zoom.icetoast.cloud)
+
 # Setup - Build - Run
 
 ## Install all dependencies
