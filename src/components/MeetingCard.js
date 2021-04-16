@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card, Typography, makeStyles, Button, ButtonGroup, Grid, Snackbar } from '@material-ui/core';
+import { Card, Typography, makeStyles, Button, ButtonGroup, Grid, Snackbar, LinearProgress } from '@material-ui/core';
 import MuiAlert from '@material-ui/lab/Alert';
 import { useDispatch } from 'react-redux';
 import { deleteMeeting } from '../actions/actions.meeting';
@@ -51,16 +51,22 @@ const useStyles = makeStyles(theme => ({
   joinIcon: {
     marginRight: theme.spacing(0.5),
   },
+  bar: {
+    transition: 'transform 0.05s linear',
+    margin: '-8',
+  },
 }));
 
-function Alert(props) {
+const Alert = props => {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
-}
+};
 
 const MeetingCard = ({ meeting, day }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [loadingProgress, setLoadingProgress] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   const getDeleteConfirm = () => {
     const confirmed = window.confirm('Please confirm to delete Meeting!');
@@ -97,7 +103,18 @@ const MeetingCard = ({ meeting, day }) => {
   const join = async () => {
     await navigator.clipboard.writeText(meeting.password);
     setOpenSnackbar(true);
-    window.open(meeting.link, '_blank');
+    setLoading(true);
+    const loadingTimer = setInterval(() => {
+      setLoadingProgress(oldProgress => {
+        if (oldProgress >= 100) {
+          clearInterval(loadingTimer);
+          setLoading(false);
+          window.open(meeting.link, '_blank');
+          return 0;
+        }
+        return oldProgress + 1;
+      });
+    }, 20);
   };
 
   const handleSnackbarClose = (event, reason) => {
@@ -110,6 +127,7 @@ const MeetingCard = ({ meeting, day }) => {
 
   return (
     <Card className={classes.root}>
+      {loading && <LinearProgress variant="determinate" value={loadingProgress} classes={{ bar: classes.bar }} />}
       <Grid container direction="column" justify="center" alignItems="center" alignContent="center">
         <Typography className={classes.meetingName}>{meeting.name}</Typography>
         <Snackbar open={openSnackbar} autoHideDuration={10000} onClose={handleSnackbarClose}>
@@ -122,7 +140,6 @@ const MeetingCard = ({ meeting, day }) => {
             <PlayArrow className={classes.joinIcon} />
             Join
           </Button>
-
           <ButtonGroup className={classes.metaButtons} size="large">
             <Button onClick={openDialogForMeetingEdit}>
               <Edit />
