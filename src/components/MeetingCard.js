@@ -63,7 +63,8 @@ const Alert = props => {
 const MeetingCard = ({ meeting, day }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [openCopySuccessSnackbar, setCopySuccessSnackbar] = useState(false);
+  const [openCopyErrorSnackbar, setCopyErrorSnackbar] = useState(false);
   const [loadingProgress, setLoadingProgress] = useState(0);
   const [loading, setLoading] = useState(false);
 
@@ -100,8 +101,15 @@ const MeetingCard = ({ meeting, day }) => {
   };
 
   const join = async () => {
-    await navigator.clipboard.writeText(meeting.password);
-    setOpenSnackbar(true);
+    if (meeting.password && navigator.clipboard) {
+      try {
+        await navigator.clipboard.writeText(meeting.password);
+      } catch (err) {
+        setCopyErrorSnackbar(true);
+      } finally {
+        !openCopyErrorSnackbar && setCopySuccessSnackbar(true);
+      }
+    }
     setLoading(true);
     const loadingTimer = setInterval(() => {
       setLoadingProgress(oldProgress => {
@@ -120,8 +128,8 @@ const MeetingCard = ({ meeting, day }) => {
     if (reason === 'clickaway') {
       return;
     }
-
-    setOpenSnackbar(false);
+    setCopySuccessSnackbar(false);
+    setCopyErrorSnackbar(false);
   };
 
   return (
@@ -129,11 +137,17 @@ const MeetingCard = ({ meeting, day }) => {
       {loading && <LinearProgress variant="determinate" value={loadingProgress} classes={{ bar: classes.bar }} />}
       <Grid container direction="column" justify="center" alignItems="center" alignContent="center">
         <Typography className={classes.meetingName}>{meeting.name}</Typography>
-        <Snackbar open={openSnackbar} autoHideDuration={10000} onClose={handleSnackbarClose}>
+        <Snackbar open={openCopySuccessSnackbar} autoHideDuration={10000} onClose={handleSnackbarClose}>
           <Alert onClose={handleSnackbarClose} severity="success">
             Meeting password: "{meeting.password}" copied to clipboard!
           </Alert>
         </Snackbar>
+        <Snackbar open={openCopyErrorSnackbar} autoHideDuration={10000} onClose={handleSnackbarClose}>
+          <Alert onClose={handleSnackbarClose} severity="error">
+            Meeting password: "{meeting.password}" could not be copied to clipboard!
+          </Alert>
+        </Snackbar>
+
         <div className={classes.buttonWrapper}>
           <Button className={classes.joinButton} onClick={join} size="large">
             <PlayArrow className={classes.joinIcon} />
