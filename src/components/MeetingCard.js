@@ -46,6 +46,7 @@ const useStyles = makeStyles(theme => ({
   },
   meetingName: {
     fontWeight: 'bold',
+    textAlign: 'center',
   },
 
   joinIcon: {
@@ -135,7 +136,7 @@ const MeetingCard = ({ meeting, day }) => {
   return (
     <Card className={classes.root}>
       {loading && <LinearProgress variant="determinate" value={loadingProgress} classes={{ bar: classes.bar }} />}
-      <Grid container direction="column" justify="center" alignItems="center" alignContent="center">
+      <Grid container justify="center" alignItems="center" alignContent="center" direction="column">
         <Typography className={classes.meetingName}>{meeting.name}</Typography>
         <Snackbar open={openCopySuccessSnackbar} autoHideDuration={10000} onClose={handleSnackbarClose}>
           <Alert onClose={handleSnackbarClose} severity="success">
