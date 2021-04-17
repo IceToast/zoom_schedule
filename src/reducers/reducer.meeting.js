@@ -19,7 +19,6 @@ export default createReducer(
     },
     [success(deleteMeeting)]: (state, action) => {
       const dayIndex = state.days.findIndex(day => day.name === action.meta.requestAction.payload.request.data.day);
-      console.log(action);
       state.days[dayIndex].meetings = state.days[dayIndex].meetings.filter(
         meeting => meeting._id !== action.meta.requestAction.payload.request.data.id
       );

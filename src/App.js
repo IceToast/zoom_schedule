@@ -69,7 +69,7 @@ const App = () => {
           <li>Delete meetings</li>
         </ul>
       ),
-      description: 'Save your meetings at one place - Access meetings from every device everywhere',
+      description: 'Save your meetings at one place - Access them from everywhere',
     }).then(() => alert('App installed successfully or instructions for install shown'));
   };
 
