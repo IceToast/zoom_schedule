@@ -14,3 +14,9 @@ export const getUserData = createAction('getUserData', _ => ({
     },
   },
 }));
+
+export const getUserAgent = createAction('getUserAgent', uaParserResult => ({
+  payload: {
+    userAgent: uaParserResult,
+  },
+}));
