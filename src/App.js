@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { AppBar, Avatar, Container, IconButton, Menu, MenuItem, Typography } from '@material-ui/core';
+import { UAParser } from 'ua-parser-js';
 import { Schedule, SignIn } from './components';
 import { useDispatch, useSelector } from 'react-redux';
 import { setThemeState } from './actions/actions.setThemeState';
 import { fetchMeetings } from './actions/actions.meeting';
-import { setLoginState, getUserData } from './actions/actions.user';
+import { setLoginState, getUserData, getUserAgent } from './actions/actions.user';
 import {
   AccountCircle as AccountCircleIcon,
   Brightness7 as DarkIcon,
@@ -91,6 +92,9 @@ const App = () => {
     });
 
     dispatch(getUserData());
+
+    let userAgent = new UAParser();
+    dispatch(getUserAgent(userAgent.getResult()));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

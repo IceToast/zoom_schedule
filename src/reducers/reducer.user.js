@@ -1,4 +1,4 @@
-import { setLoginState, getUserData } from '../actions/actions.user';
+import { setLoginState, getUserData, getUserAgent } from '../actions/actions.user';
 import { createReducer } from '@reduxjs/toolkit';
 import { success } from '@redux-requests/core';
 
@@ -10,6 +10,9 @@ export default createReducer(
     },
     [success(getUserData)]: (state, action) => {
       state.userData = action.payload.data;
+    },
+    [getUserAgent]: (state, action) => {
+      state.userAgent = action.payload.userAgent;
     },
   }
 );
