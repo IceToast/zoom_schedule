@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Card, Typography, makeStyles, Button, ButtonGroup, Grid, Snackbar, LinearProgress } from '@material-ui/core';
 import MuiAlert from '@material-ui/lab/Alert';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { deleteMeeting } from '../actions/actions.meeting';
 import { PlayArrow, Delete, Edit } from '@material-ui/icons';
 import { setFormDialogState } from '../actions/actions.setFormDialogState';
@@ -64,6 +64,7 @@ const Alert = props => {
 const MeetingCard = ({ meeting, day }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const userAgent = useSelector(state => state.user.userAgent);
   const [openCopySuccessSnackbar, setCopySuccessSnackbar] = useState(false);
   const [openCopyErrorSnackbar, setCopyErrorSnackbar] = useState(false);
   const [loadingProgress, setLoadingProgress] = useState(0);
@@ -101,28 +102,32 @@ const MeetingCard = ({ meeting, day }) => {
     );
   };
 
-  const join = async () => {
+  const join = () => {
     if (meeting.password && navigator.clipboard) {
       try {
-        await navigator.clipboard.writeText(meeting.password);
+        navigator.clipboard.writeText(meeting.password);
       } catch (err) {
         setCopyErrorSnackbar(true);
       } finally {
         !openCopyErrorSnackbar && setCopySuccessSnackbar(true);
       }
     }
-    setLoading(true);
-    const loadingTimer = setInterval(() => {
-      setLoadingProgress(oldProgress => {
-        if (oldProgress >= 100) {
-          clearInterval(loadingTimer);
-          setLoading(false);
-          window.open(meeting.link, '_blank');
-          return 0;
-        }
-        return oldProgress + 1;
-      });
-    }, 20);
+    if (!userAgent.browser.name.includes('Safari')) {
+      setLoading(true);
+      const loadingTimer = setInterval(() => {
+        setLoadingProgress(oldProgress => {
+          if (oldProgress >= 100) {
+            clearInterval(loadingTimer);
+            setLoading(false);
+            window.open(meeting.link, '_blank');
+            return 0;
+          }
+          return oldProgress + 1;
+        });
+      }, 20);
+    } else {
+      window.open(meeting.link, '_blank');
+    }
   };
 
   const handleSnackbarClose = (event, reason) => {
