@@ -1,5 +1,15 @@
 import React, { useState } from 'react';
-import { Card, Typography, makeStyles, Button, ButtonGroup, Grid, Snackbar, LinearProgress } from '@material-ui/core';
+import {
+  Card,
+  Typography,
+  makeStyles,
+  Button,
+  ButtonGroup,
+  Grid,
+  Snackbar,
+  LinearProgress,
+  Tooltip,
+} from '@material-ui/core';
 import MuiAlert from '@material-ui/lab/Alert';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteMeeting } from '../actions/actions.meeting';
@@ -155,17 +165,23 @@ const MeetingCard = ({ meeting, day }) => {
         </Snackbar>
 
         <div className={classes.buttonWrapper}>
-          <Button className={classes.joinButton} onClick={join} size="large">
-            <PlayArrow className={classes.joinIcon} />
-            Join
-          </Button>
+          <Tooltip title="Join Meeting" aria-label="Join Meeting">
+            <Button className={classes.joinButton} onClick={join} size="large">
+              <PlayArrow className={classes.joinIcon} />
+              Join
+            </Button>
+          </Tooltip>
           <ButtonGroup className={classes.metaButtons} size="large">
-            <Button onClick={openDialogForMeetingEdit}>
-              <Edit />
-            </Button>
-            <Button onClick={getDeleteConfirm}>
-              <Delete />
-            </Button>
+            <Tooltip title="Edit Meeting" aria-label="Edit Meeting">
+              <Button onClick={openDialogForMeetingEdit}>
+                <Edit />
+              </Button>
+            </Tooltip>
+            <Tooltip title="Delete Meeting" aria-label="Delete Meeting">
+              <Button onClick={getDeleteConfirm}>
+                <Delete />
+              </Button>
+            </Tooltip>
           </ButtonGroup>
         </div>
       </Grid>

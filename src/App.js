@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { AppBar, Avatar, Container, IconButton, Menu, MenuItem, Typography } from '@material-ui/core';
+import { AppBar, Avatar, Container, IconButton, Menu, MenuItem, Typography, Tooltip } from '@material-ui/core';
 import { UAParser } from 'ua-parser-js';
 import { Schedule, SignIn } from './components';
 import { useDispatch, useSelector } from 'react-redux';
@@ -126,30 +126,40 @@ const App = () => {
             </Typography>
             <div>
               {supported() && !isInstalled() && (
-                <IconButton onClick={handleClick} className={classes.userButton} color="secondary.main" variant="contained">
-                  <SystemUpdateAltIcon className={classes.installIcon} />
-                </IconButton>
-              )}
-              <IconButton
-                onClick={handleDarkModeButtonClick}
-                className={classes.userButton}
-                color="secondary.main"
-                variant="contained">
-                {themePaletteType === 'dark' ? (
-                  <DarkIcon className={classes.darkModeIcons} />
-                ) : (
-                  <BrightIcon className={classes.darkModeIcons} />
-                )}
-              </IconButton>
-              {userData ? (
-                <>
+                <Tooltip title="Install App" aria-label="Install App">
                   <IconButton
+                    onClick={handleClick}
                     className={classes.userButton}
-                    onClick={openUserDropdownMenu}
                     color="secondary.main"
                     variant="contained">
-                    <Avatar className={classes.avatarIcon} alt={userData.username} src={userData.avatarurl} />
+                    <SystemUpdateAltIcon className={classes.installIcon} />
                   </IconButton>
+                </Tooltip>
+              )}
+              <Tooltip title="Switch Theme" aria-label="Switch Theme">
+                <IconButton
+                  onClick={handleDarkModeButtonClick}
+                  className={classes.userButton}
+                  color="secondary.main"
+                  variant="contained">
+                  {themePaletteType === 'dark' ? (
+                    <DarkIcon className={classes.darkModeIcons} />
+                  ) : (
+                    <BrightIcon className={classes.darkModeIcons} />
+                  )}
+                </IconButton>
+              </Tooltip>
+              {userData ? (
+                <>
+                  <Tooltip title="User" aria-label="User">
+                    <IconButton
+                      className={classes.userButton}
+                      onClick={openUserDropdownMenu}
+                      color="secondary.main"
+                      variant="contained">
+                      <Avatar className={classes.avatarIcon} alt={userData.username} src={userData.avatarurl} />
+                    </IconButton>
+                  </Tooltip>
                   <Menu
                     id="user-menu"
                     anchorEl={dropdownAnchorEl}
@@ -169,9 +179,11 @@ const App = () => {
                   </Menu>
                 </>
               ) : (
-                <IconButton className={classes.userButton} color="secondary.main" variant="contained" disabled>
-                  <AccountCircleIcon className={classes.avatarIcon} />
-                </IconButton>
+                <Tooltip title="User" aria-label="User">
+                  <IconButton className={classes.userButton} color="secondary.main" variant="contained" disabled>
+                    <AccountCircleIcon className={classes.avatarIcon} />
+                  </IconButton>
+                </Tooltip>
               )}
             </div>
           </Container>
