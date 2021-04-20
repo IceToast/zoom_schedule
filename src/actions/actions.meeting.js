@@ -34,6 +34,15 @@ export const deleteMeeting = createAction('deleteMeeting', (deleteMeeting, delet
   },
 }));
 
+export const flushSchedule = createAction('flushSchedule', () => ({
+  payload: {
+    request: {
+      url: '/meeting/flushSchedule',
+      method: 'DELETE',
+    },
+  },
+}));
+
 export const editMeeting = createAction('editMeeting', meetingData => ({
   payload: {
     request: {

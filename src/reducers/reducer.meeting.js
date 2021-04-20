@@ -1,9 +1,20 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { success } from '@redux-requests/core';
-import { fetchMeetings, createMeeting, editMeeting, deleteMeeting } from '../actions/actions.meeting';
+import { fetchMeetings, createMeeting, editMeeting, deleteMeeting, flushSchedule } from '../actions/actions.meeting';
+
+const initalDaysState = [
+  { name: 'Monday', meetings: [] },
+  { name: 'Tuesday', meetings: [] },
+  { name: 'Wednesday', meetings: [] },
+  { name: 'Thursday', meetings: [] },
+  { name: 'Friday', meetings: [] },
+  { name: 'Saturday', meetings: [] },
+];
 
 export default createReducer(
-  { days: {} },
+  {
+    days: initalDaysState,
+  },
   {
     [success(fetchMeetings)]: (state, action) => {
       state.days = action.payload.data;
@@ -22,6 +33,9 @@ export default createReducer(
       state.days[dayIndex].meetings = state.days[dayIndex].meetings.filter(
         meeting => meeting._id !== action.meta.requestAction.payload.request.data.id
       );
+    },
+    [success(flushSchedule)]: (state, action) => {
+      state.days = initalDaysState;
     },
   }
 );

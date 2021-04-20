@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { AppBar, Avatar, Container, IconButton, Menu, MenuItem, Typography, Tooltip } from '@material-ui/core';
 import { UAParser } from 'ua-parser-js';
-import { Schedule, SignIn } from './components';
+import { Schedule, SignIn, ImportExport } from './components';
 import { useDispatch, useSelector } from 'react-redux';
 import { setThemeState } from './actions/actions.setThemeState';
 import { fetchMeetings } from './actions/actions.meeting';
@@ -12,6 +12,7 @@ import {
   Brightness7 as DarkIcon,
   Brightness4 as BrightIcon,
   SystemUpdateAlt as SystemUpdateAltIcon,
+  ImportExport as ImportExportIcon,
 } from '@material-ui/icons';
 import { useReactPWAInstall } from 'react-pwa-install';
 
@@ -53,6 +54,7 @@ const App = () => {
   const isLoggedIn = useSelector(state => state.user.isLoggedIn);
   const themePaletteType = useSelector(state => state.theme.paletteType);
   const [dropdownAnchorEl, setDropdownAnchorEl] = useState(null);
+  const [isImportExportDialogOpen, setIsImportExportDialogOpen] = useState(false);
   const userData = useSelector(state => state.user.userData);
 
   const classes = useStyles({ themePaletteType });
@@ -136,6 +138,16 @@ const App = () => {
                   </IconButton>
                 </Tooltip>
               )}
+              <Tooltip title="Import/Export" aria-label="Import/Export">
+                <IconButton
+                  onClick={() => setIsImportExportDialogOpen(true)}
+                  className={classes.userButton}
+                  color="secondary.main"
+                  variant="contained">
+                  <ImportExportIcon className={classes.darkModeIcons} />
+                </IconButton>
+              </Tooltip>
+              <ImportExport open={isImportExportDialogOpen} onClose={() => setIsImportExportDialogOpen(false)} />
               <Tooltip title="Switch Theme" aria-label="Switch Theme">
                 <IconButton
                   onClick={handleDarkModeButtonClick}
