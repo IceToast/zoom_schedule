@@ -38,7 +38,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function pushToHref(socialLoginProvider) {
-  window.location.pathname = '/api/auth/' + socialLoginProvider;
+  window.location.pathname = `/api/auth/${socialLoginProvider}`;
 }
 
 const SignIn = () => {
@@ -64,7 +64,7 @@ const SignIn = () => {
           <img alt="Sign In" src="/images/loginButtons/discord.svg" />
           <span>with Discord</span>
         </Button>
-        <Button id="Github" disabled>
+        <Button id="Github" onClick={() => pushToHref('github')}>
           <img alt="Sign In" src="/images/loginButtons/github.svg" />
           <span>with Github</span>
         </Button>
