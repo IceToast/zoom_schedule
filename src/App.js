@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { AppBar, Avatar, Container, IconButton, Menu, MenuItem, Typography } from '@material-ui/core';
 import { UAParser } from 'ua-parser-js';
-import { Schedule, SignIn } from './components';
+import { Schedule, SignIn, ImportExport } from './components';
 import { useDispatch, useSelector } from 'react-redux';
 import { setThemeState } from './actions/actions.setThemeState';
 import { fetchMeetings } from './actions/actions.meeting';
@@ -12,10 +12,9 @@ import {
   Brightness7 as DarkIcon,
   Brightness4 as BrightIcon,
   SystemUpdateAlt as SystemUpdateAltIcon,
-  Settings as SettingsIcon,
+  ImportExport as ImportExportIcon,
 } from '@material-ui/icons';
 import { useReactPWAInstall } from 'react-pwa-install';
-import Settings from './components/Settings';
 
 const useStyles = makeStyles(theme => ({
   appBar: {
@@ -138,9 +137,9 @@ const App = () => {
                 className={classes.userButton}
                 color="secondary.main"
                 variant="contained">
-                <SettingsIcon className={classes.darkModeIcons} />
+                <ImportExportIcon className={classes.darkModeIcons} />
               </IconButton>
-              <Settings open={isSettingsDialogOpen} onClose={() => setIsSettingsDialogOpen(false)} />
+              <ImportExport open={isSettingsDialogOpen} onClose={() => setIsSettingsDialogOpen(false)} />
               <IconButton
                 onClick={handleDarkModeButtonClick}
                 className={classes.userButton}

@@ -20,13 +20,8 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     alignContent: 'center',
     alignItems: 'center',
-
-    '&:not(:last-child)': {
-      marginBottom: theme.spacing(1.5),
-    },
-  },
-  left: {
-    flex: 1,
+    justifyContent: 'space-between',
+    marginBottom: theme.spacing(1.5),
   },
   button: {
     margin: theme.spacing(0, 1),
@@ -34,9 +29,12 @@ const useStyles = makeStyles(theme => ({
   checkbox: {
     margin: theme.spacing(0, 1),
   },
+  input: {
+    display: 'none',
+  },
 }));
 
-const Settings = props => {
+const ImportExport = props => {
   const classes = useStyles();
   const dispatch = useDispatch();
 
@@ -107,8 +105,8 @@ const Settings = props => {
 
   return (
     <>
-      <Dialog open={props.open} onClose={props.onClose} maxWidth="xs">
-        <DialogTitle>Settings</DialogTitle>
+      <Dialog open={props.open} onClose={props.onClose} maxWidth="false">
+        <DialogTitle>Import/Export Meetings</DialogTitle>
 
         <DialogContent>
           <div className={classes.row}>
@@ -118,12 +116,18 @@ const Settings = props => {
             </Button>
           </div>
           <div className={classes.row}>
-            <Input
-              inputRef={importFileInput}
-              type="file"
-              className={classes.left}
-              inputProps={{ accept: 'application/JSON' }}
-            />
+            <label htmlFor="contained-button-file">
+              <Input
+                className={classes.input}
+                inputRef={importFileInput}
+                id="contained-button-file"
+                type="file"
+                accept="application/JSON"
+              />
+              <Button variant="contained" component="span">
+                Choose File...
+              </Button>
+            </label>
             <FormControlLabel
               className={classes.checkbox}
               control={<Switch color="primary" inputRef={overwriteCheckbox} />}
@@ -144,4 +148,4 @@ const Settings = props => {
   );
 };
 
-export default Settings;
+export default ImportExport;
