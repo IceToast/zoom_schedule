@@ -12,8 +12,10 @@ import {
   Brightness7 as DarkIcon,
   Brightness4 as BrightIcon,
   SystemUpdateAlt as SystemUpdateAltIcon,
+  Settings as SettingsIcon,
 } from '@material-ui/icons';
 import { useReactPWAInstall } from 'react-pwa-install';
+import Settings from './components/Settings';
 
 const useStyles = makeStyles(theme => ({
   appBar: {
@@ -53,6 +55,7 @@ const App = () => {
   const isLoggedIn = useSelector(state => state.user.isLoggedIn);
   const themePaletteType = useSelector(state => state.theme.paletteType);
   const [dropdownAnchorEl, setDropdownAnchorEl] = useState(null);
+  const [isSettingsDialogOpen, setIsSettingsDialogOpen] = useState(false);
   const userData = useSelector(state => state.user.userData);
 
   const classes = useStyles({ themePaletteType });
@@ -130,6 +133,14 @@ const App = () => {
                   <SystemUpdateAltIcon className={classes.installIcon} />
                 </IconButton>
               )}
+              <IconButton
+                onClick={() => setIsSettingsDialogOpen(true)}
+                className={classes.userButton}
+                color="secondary.main"
+                variant="contained">
+                <SettingsIcon className={classes.darkModeIcons} />
+              </IconButton>
+              <Settings open={isSettingsDialogOpen} onClose={() => setIsSettingsDialogOpen(false)} />
               <IconButton
                 onClick={handleDarkModeButtonClick}
                 className={classes.userButton}

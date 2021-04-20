@@ -1,6 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { success } from '@redux-requests/core';
-import { fetchMeetings, createMeeting, editMeeting, deleteMeeting } from '../actions/actions.meeting';
+import { fetchMeetings, createMeeting, editMeeting, deleteMeeting, flushSchedule } from '../actions/actions.meeting';
 
 export default createReducer(
   { days: {} },
@@ -22,6 +22,9 @@ export default createReducer(
       state.days[dayIndex].meetings = state.days[dayIndex].meetings.filter(
         meeting => meeting._id !== action.meta.requestAction.payload.request.data.id
       );
+    },
+    [success(flushSchedule)]: (state, action) => {
+      // After flushing, usually fetchMeetings gets called.
     },
   }
 );
