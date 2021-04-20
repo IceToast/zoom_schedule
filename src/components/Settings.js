@@ -98,7 +98,7 @@ const Settings = props => {
       });
     });
 
-    reader.readAsText(jsonDataFile);
+    reader.readAsText(jsonDataFile, 'UTF-8');
   };
 
   const closeErrorSnackbar = () => {
