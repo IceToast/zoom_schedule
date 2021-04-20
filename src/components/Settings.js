@@ -10,7 +10,6 @@ import {
   Switch,
 } from '@material-ui/core';
 import { generateJSONFile } from '../util/json';
-import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRef, useState } from 'react';
 import Alert from '@material-ui/lab/Alert';
@@ -71,16 +70,31 @@ const Settings = props => {
 
       // Add Meetings
       data.forEach(day => {
-        day.meetings.forEach(meeting => {
-          dispatch(
-            createMeeting({
-              day: meeting.day,
-              name: meeting.name,
-              link: meeting.link,
-              password: meeting.password,
-            })
-          );
-        });
+        if (day.meetings) {
+          day.meetings.forEach(meeting => {
+            dispatch(
+              createMeeting({
+                day: day.name,
+                name: meeting.name,
+                link: meeting.link,
+                password: meeting.password,
+              })
+            );
+          });
+        }
+        // Support Zoom-Calendar json
+        if (day.subjects) {
+          day.subjects.forEach(meeting => {
+            dispatch(
+              createMeeting({
+                day: day.name,
+                name: meeting.name,
+                link: meeting.link,
+                password: meeting.pass,
+              })
+            );
+          });
+        }
       });
     });
 
@@ -128,11 +142,6 @@ const Settings = props => {
       </Dialog>
     </>
   );
-};
-
-Settings.propTypes = {
-  open: PropTypes.bool.isRequired,
-  onClose: PropTypes.func.isRequired,
 };
 
 export default Settings;

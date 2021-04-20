@@ -2,8 +2,19 @@ import { createReducer } from '@reduxjs/toolkit';
 import { success } from '@redux-requests/core';
 import { fetchMeetings, createMeeting, editMeeting, deleteMeeting, flushSchedule } from '../actions/actions.meeting';
 
+const initalDaysState = [
+  { name: 'Monday', meetings: [] },
+  { name: 'Tuesday', meetings: [] },
+  { name: 'Wednesday', meetings: [] },
+  { name: 'Thursday', meetings: [] },
+  { name: 'Friday', meetings: [] },
+  { name: 'Saturday', meetings: [] },
+];
+
 export default createReducer(
-  { days: {} },
+  {
+    days: initalDaysState,
+  },
   {
     [success(fetchMeetings)]: (state, action) => {
       state.days = action.payload.data;
@@ -24,7 +35,7 @@ export default createReducer(
       );
     },
     [success(flushSchedule)]: (state, action) => {
-      // After flushing, usually fetchMeetings gets called.
+      state.days = initalDaysState;
     },
   }
 );
