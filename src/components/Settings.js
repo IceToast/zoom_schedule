@@ -14,7 +14,7 @@ import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRef, useState } from 'react';
 import Alert from '@material-ui/lab/Alert';
-import { flushSchedule } from '../actions/actions.meeting';
+import { createMeeting, flushSchedule } from '../actions/actions.meeting';
 
 const useStyles = makeStyles(theme => ({
   row: {
@@ -63,14 +63,25 @@ const Settings = props => {
 
     const reader = new FileReader();
     reader.addEventListener('load', async () => {
-      /* if (overWriteCheckboxChecked) {
+      const data = JSON.parse(reader.result);
+
+      if (overWriteCheckboxChecked) {
         await dispatch(flushSchedule());
-      } */
+      }
 
       // Add Meetings
-      // await dispatch(addMeetings())
-
-      console.log(JSON.parse(reader.result));
+      data.forEach(day => {
+        day.meetings.forEach(meeting => {
+          dispatch(
+            createMeeting({
+              day: meeting.day,
+              name: meeting.name,
+              link: meeting.link,
+              password: meeting.password,
+            })
+          );
+        });
+      });
     });
 
     reader.readAsText(jsonDataFile);
