@@ -153,12 +153,20 @@ const MeetingCard = ({ meeting, day }) => {
       {loading && <LinearProgress variant="determinate" value={loadingProgress} classes={{ bar: classes.bar }} />}
       <Grid container justify="center" alignItems="center" alignContent="center" direction="column">
         <Typography className={classes.meetingName}>{meeting.name}</Typography>
-        <Snackbar open={openCopySuccessSnackbar} autoHideDuration={10000} onClose={handleSnackbarClose}>
+        <Snackbar
+          open={openCopySuccessSnackbar}
+          disableWindowBlurListener="true"
+          autoHideDuration={10000}
+          onClose={handleSnackbarClose}>
           <Alert onClose={handleSnackbarClose} severity="success">
             Meeting password: "{meeting.password}" copied to clipboard!
           </Alert>
         </Snackbar>
-        <Snackbar open={openCopyErrorSnackbar} autoHideDuration={10000} onClose={handleSnackbarClose}>
+        <Snackbar
+          open={openCopyErrorSnackbar}
+          disableWindowBlurListener="true"
+          autoHideDuration={10000}
+          onClose={handleSnackbarClose}>
           <Alert onClose={handleSnackbarClose} severity="error">
             Meeting password: "{meeting.password}" could not be copied to clipboard!
           </Alert>
