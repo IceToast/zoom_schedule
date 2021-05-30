@@ -38,7 +38,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function pushToHref(socialLoginProvider) {
-  window.location.pathname = `/api/auth/${socialLoginProvider}?redirectUrl=https%3A%2F%2Fzoom.icetoast.cloud`;
+  window.location = `/api/auth/${socialLoginProvider}?redirectUrl=https%3A%2F%2Fzoom.icetoast.cloud`;
 }
 
 const SignIn = () => {
