@@ -20,8 +20,8 @@ export default createReducer(
       state.days = action.payload.data;
     },
     [success(createMeeting)]: (state, action) => {
-      const dayIndex = state.days.findIndex(day => day.name === action.meta.requestAction.payload.request.data.day);
-      state.days[dayIndex].meetings = state.days[dayIndex].meetings.concat(action.payload.data);
+      const dayIndex = state.days.findIndex(day => day.name === action.meta.requestAction.payload.request.data[0].day);
+      state.days[dayIndex].meetings = state.days[dayIndex].meetings.concat(action.payload.data[0]);
     },
     [success(editMeeting)]: (state, action) => {
       const dayIndex = state.days.findIndex(day => day.name === action.meta.requestAction.payload.request.data.day);
