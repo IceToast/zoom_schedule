@@ -11,12 +11,14 @@ export const createMeeting = createAction('createMeeting', meetingData => ({
     request: {
       url: '/meeting',
       method: 'POST',
-      data: {
-        day: meetingData.day,
-        name: meetingData.name,
-        link: meetingData.link,
-        password: meetingData.password,
-      },
+      data: [
+        {
+          day: meetingData.day,
+          name: meetingData.name,
+          link: meetingData.link,
+          password: meetingData.password,
+        },
+      ],
     },
   },
 }));
