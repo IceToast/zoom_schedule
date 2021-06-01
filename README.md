@@ -4,7 +4,7 @@
 # Zoom Schedule
 
 This Schedule helps students to keep all their Zoom-Links and passwords at one place and access them from every device.
-If you want to host this App yourself and plan to use the compatible API from me, make sure to host both Apps on the same TLD or use CORS correctly.
+If you want to host this App yourself and plan to use the [compatible API](https://github.com/IceToast/zoom_schedule_backend_go) from me, make sure to host both Apps on the same TLD or use CORS correctly.
 
 # Demo
 
